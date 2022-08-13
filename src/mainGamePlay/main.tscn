@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/mainGamePlay/main.gd" type="Script" id=1]
-[ext_resource path="res://src/mongooses/mongoose/mongoose.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/mongooses/waterMongoose/waterMongoose.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/mainGamePlay/plantControl.gd" type="Script" id=3]
 [ext_resource path="res://graphics/background/background.png" type="Texture" id=4]
+[ext_resource path="res://src/mongooses/gardererMongoose/gardenMongoose.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/mongooses/fireMongoose/fireMongoose.tscn" type="PackedScene" id=6]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -39,7 +41,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="mongoose" parent="mongooses" instance=ExtResource( 2 )]
+[node name="water" parent="mongooses" instance=ExtResource( 2 )]
+margin_top = -59.0
+margin_right = 119.0
+margin_bottom = 280.0
+
+[node name="fire" parent="mongooses" instance=ExtResource( 5 )]
+margin_top = -1046.0
+margin_bottom = -47.0
+
+[node name="garden" parent="mongooses" instance=ExtResource( 6 )]
+margin_top = 1094.0
+margin_bottom = 1437.0
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 955, 542 )
