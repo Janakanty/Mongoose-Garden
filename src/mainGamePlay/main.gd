@@ -2,6 +2,8 @@ extends Control
 
 onready var mongooses = $mongooses
 var column = 1
+var mongoose_mode = 1 # 1 - water , 2 - fire , 3 - garderer
+var mongoose_is_changing = 0
 
 func _ready():
 	pass # Replace with function body.
@@ -9,6 +11,7 @@ func _ready():
 func _input(event):
 	change_mongoose_position()
 	quit()
+	change_mongoose_to_active()
 	
 func quit():
 	if Input.is_action_pressed("quit"):
@@ -24,7 +27,19 @@ func mongoose_control():
 	pass
 	
 func change_mongoose_to_active():
-	pass
+	if Input.is_action_just_pressed("up") and mongoose_is_changing == 0 :
+		mongoose_is_changing = 1
+		match mongoose_mode:
+			1:
+				mongoose_mode = 2
+				$changeMongoose.play("change_to_fire")
+			2:
+				mongoose_mode = 3
+				$changeMongoose.play("change_to_garden")
+			3:
+				mongoose_mode = 1
+				$changeMongoose.play("change_to_water")
+		pass
 	
 func change_mongoose_position():
 	if Input.is_action_just_pressed("left") and column > 1:
@@ -50,4 +65,12 @@ func check_mognoose_position():
 			mongooses.rect_position.x = 1446
 		7:
 			mongooses.rect_position.x = 1689
-	print(column)
+
+
+func _on_changeMongoose_animation_finished(anim_name):
+	mongoose_is_changing = 0
+
+
+func _on_Button_pressed(): # znikające menu
+	#$changeMongoose.play("endMenu")
+	pass

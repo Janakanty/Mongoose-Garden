@@ -1,16 +1,14 @@
 extends Control
 
+#specyfika każdy kwiatek ma swoje warunki. Ma czas na sobie. 
+var my_column = 0
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	pass
+	#co siędzieje jak się pojawia? Cały czas patrzy na globala na to co robią mangusty
+	
+func _process(delta):
+	pass
+	
+func my_condition_to_grove():
+	pass

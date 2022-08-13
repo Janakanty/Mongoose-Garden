@@ -1,18 +1,14 @@
 extends Control
 
-var plant = preload("res://src/plants/plant/plant.tscn")
+var plant = preload("res://src/plants/lobdilla/lobdilla.tscn")
 
 var plant_slots = [0,0,0,0,0,0,0]
 var rng
 var my_random_number
 
-func _ready():
-	get_new_plant()
-	get_new_plant()
-	get_new_plant()
-	get_new_plant()
-	get_new_plant()
 
+func _ready():
+	gameplay_plan_machine()
 
 
 func _process(delta):
@@ -35,29 +31,27 @@ func get_new_plant():
 		var rng = rand_number()
 		match rng:
 			0:
-				next_plant.rect_position = Vector2(231,605)
-				print("pierwszy slot")
+				next_plant.rect_position = Vector2(231,360)
 			1:
-				next_plant.rect_position = Vector2(474,605)
-				print("drugi slot")
+				next_plant.rect_position = Vector2(474,360)
 			2:
-				next_plant.rect_position = Vector2(717,605)
-				print("trzeci slot")
+				next_plant.rect_position = Vector2(717,360)
 			3:
-				next_plant.rect_position = Vector2(960,605)
-				print("czwarty slot")
+				next_plant.rect_position = Vector2(960,360)
 			4:
-				next_plant.rect_position = Vector2(1203,605)
-				print("piaty slot")
+				next_plant.rect_position = Vector2(1203,360)
 			5:
-				next_plant.rect_position = Vector2(1446,605)
-				print("szosty slot")
+				next_plant.rect_position = Vector2(1446,360)
 			6:
-				next_plant.rect_position = Vector2(1689,605)
-				print("siodmy slot")
+				next_plant.rect_position = Vector2(1689,360)
+		next_plant.my_column = rng
 		plant_slots[rng] = 1
 		add_child(next_plant)
 		
-		print(rng , "fef")
-		
+func gameplay_plan_machine():
+	get_new_plant()
+	get_new_plant()
+	
+func set_plant():
+	plant = preload("res://src/plants/lobdilla/lobdilla.tscn")
 		

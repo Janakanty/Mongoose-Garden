@@ -5,10 +5,34 @@
 
 [sub_resource type="Animation" id=1]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "powerON"
 length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.956863, 0.654902, 0.654902, 1 ) ]
+}
 
 [node name="mongoose" type="Control"]
 margin_left = -116.0
@@ -21,7 +45,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="TextureRect" parent="."]
+[node name="texture" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 3.198
 margin_bottom = -736.914
