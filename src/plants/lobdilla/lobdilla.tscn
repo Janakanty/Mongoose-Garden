@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/plants/lobdilla/lobdilla.gd" type="Script" id=1]
 [ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka OK.png" type="Texture" id=2]
 [ext_resource path="res://graphics/plants/lobdilla/lobdilla doniczka.png" type="Texture" id=3]
+[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka DEAD.png" type="Texture" id=4]
+[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA BAD.png" type="Texture" id=5]
+[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA DEAD.png" type="Texture" id=6]
+[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka BAD.png" type="Texture" id=7]
+[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA OK.png" type="Texture" id=8]
+[ext_resource path="res://src/plants/stars.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/plants/x.tscn" type="PackedScene" id=10]
 
 [node name="plant" type="Control"]
 anchor_left = -0.036
@@ -19,15 +26,78 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 2 )
-
-[node name="ColorRect2" type="TextureRect" parent="."]
+[node name="flowerPot" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
+
+[node name="smallPlantOK" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="smallPlantBAD" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="smallPlantDEAD" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="x" parent="smallPlantDEAD" instance=ExtResource( 10 )]
+
+[node name="plantOK" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="plantBAD" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="plantDEAD" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="x" parent="plantDEAD" instance=ExtResource( 10 )]
+
+[node name="plantREADY" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stars" parent="plantREADY" instance=ExtResource( 9 )]
 
 [node name="Timer_to_lose" type="Timer" parent="."]
 wait_time = 5.0
