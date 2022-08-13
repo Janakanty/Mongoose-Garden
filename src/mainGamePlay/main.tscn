@@ -1,22 +1,47 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/mainGamePlay/main.gd" type="Script" id=1]
 [ext_resource path="res://src/mongooses/mongoose/mongoose.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/mainGamePlay/plantControl.gd" type="Script" id=3]
+[ext_resource path="res://graphics/background/background.png" type="Texture" id=4]
 
-[node name="main" type="Node2D"]
+[node name="main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 1203.0 ]
+}
 
-[node name="background" type="Node2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="background"]
-margin_right = 1023.0
-margin_bottom = 597.0
-color = Color( 0.137255, 0.137255, 0.137255, 1 )
+[node name="background" type="Control" parent="."]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="mongooses" type="Node2D" parent="."]
+[node name="ColorRect" type="TextureRect" parent="background"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 4 )
+
+[node name="plantControl" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mongooses" type="Control" parent="."]
+margin_left = 231.0
+margin_right = 231.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="mongoose" parent="mongooses" instance=ExtResource( 2 )]
-position = Vector2( 188, 47 )
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 955, 542 )
+
+[node name="changeMongoose" type="AnimationPlayer" parent="."]

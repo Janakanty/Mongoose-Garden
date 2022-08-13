@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var active: bool = true
 
@@ -19,4 +19,4 @@ func powerON():
 	$power.play("powerON")
 	
 func powerOFF():
-	$power.play_backwards()
+	$power.play_backwards("powerON")

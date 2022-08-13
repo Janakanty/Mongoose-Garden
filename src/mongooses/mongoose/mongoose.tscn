@@ -32,12 +32,20 @@ tracks/0/keys = {
 "values": [ Color( 0.870588, 0.270588, 0.270588, 1 ), Color( 0.878431, 0.733333, 0.0627451, 1 ) ]
 }
 
-[node name="mongoose" type="Node2D"]
+[node name="mongoose" type="Control"]
+margin_left = -74.0
+margin_top = -1.0
+margin_right = 74.0
+margin_bottom = 342.0
+rect_pivot_offset = Vector2( 74, 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 132.0
-margin_bottom = 204.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.870588, 0.270588, 0.270588, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
