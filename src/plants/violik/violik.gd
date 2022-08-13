@@ -2,8 +2,6 @@ extends Control
 
 
 #zmienne rośliny
-onready var regres_bar = $regres
-onready var progres_bar =$progres
 onready var timer_down = $Timer_to_lose
 var my_column = 0 #kolumna w którejjest rośłina
 var have_i_grown_up = 0 
@@ -12,23 +10,17 @@ var plant_condition = 2 #stan rośliny
 var time_down = 5.0 # czas w którym roślina zdycha
 var ready = 0 #czy jest gotowa do wzicia 0 - nie, 1 - tak
 
-
-
 func _ready():
 	timer_down.wait_time = time_down
 	
 	
 func _process(delta):
-	lose_way()
+	pass
 	
 
 func grow_way():
 	#każda roślina ma swój specjalny grow way
-	
 	pass
-
-func lose_way():
-	regres_bar.value = timer_down.time_left
 
 func check_plant_condition():
 	#roślina zdycha
@@ -90,9 +82,6 @@ func taken_off_the_board():
 	if ready == 1:
 		Global.point += 1
 	queue_free()
-
-func reset_condition():
-	pass
 
 func _on_Timer_to_lose_timeout():
 	plant_condition = plant_condition - 1 

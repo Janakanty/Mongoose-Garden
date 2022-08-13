@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://src/plants/lobdilla/lobdilla.gd" type="Script" id=1]
+[ext_resource path="res://src/plants/violik/violik.gd" type="Script" id=1]
 [ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka OK.png" type="Texture" id=2]
 [ext_resource path="res://graphics/plants/lobdilla/lobdilla doniczka.png" type="Texture" id=3]
 [ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka DEAD.png" type="Texture" id=4]
@@ -10,7 +10,6 @@
 [ext_resource path="res://graphics/plants/lobdilla/LOBDILLA OK.png" type="Texture" id=8]
 [ext_resource path="res://src/plants/stars.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/plants/x.tscn" type="PackedScene" id=10]
-[ext_resource path="res://graphics/interface/progresBar.png" type="Texture" id=11]
 
 [node name="plant" type="Control"]
 anchor_left = -0.036
@@ -31,38 +30,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="progres" type="TextureProgress" parent="."]
-margin_left = 60.0
-margin_top = 333.0
-margin_right = 126.0
-margin_bottom = 399.0
-value = 90.0
-texture_progress = ExtResource( 11 )
-fill_mode = 4
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="regres" type="TextureProgress" parent="."]
-self_modulate = Color( 0.313726, 0.419608, 0.984314, 1 )
-margin_left = 60.0
-margin_top = 333.0
-margin_right = 126.0
-margin_bottom = 399.0
-max_value = 5.0
-step = 0.01
-value = 5.0
-texture_progress = ExtResource( 11 )
-fill_mode = 3
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="smallPlantOK" type="TextureRect" parent="."]
 anchor_right = 1.0
