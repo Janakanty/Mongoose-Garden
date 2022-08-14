@@ -44,7 +44,7 @@ func get_new_plant():
 				next_plant.rect_position = Vector2(1436,360)
 			6:
 				next_plant.rect_position = Vector2(1679,360)
-		next_plant.my_column = rng
+		next_plant.my_column = rng + 1
 		plant_slots[rng] = 1
 		add_child(next_plant)
 		

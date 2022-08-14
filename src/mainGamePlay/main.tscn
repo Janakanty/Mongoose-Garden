@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/mainGamePlay/main.gd" type="Script" id=1]
 [ext_resource path="res://src/mongooses/waterMongoose/waterMongoose.tscn" type="PackedScene" id=2]
@@ -155,22 +155,6 @@ tracks/1/keys = {
 "values": [ Vector2( -116, -351 ), Vector2( -116, -59 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "endMenu"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 2.82843, 2.82843 ),
-"update": 0,
-"values": [ Vector2( -182, -51 ), Vector2( -2387, -54 ) ]
-}
-
 [node name="main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -179,6 +163,9 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_edit_vertical_guides_": [ 1203.0 ]
 }
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 955, 542 )
 
 [node name="background" type="Control" parent="."]
 __meta__ = {
@@ -218,15 +205,11 @@ margin_bottom = -47.0
 margin_top = 1094.0
 margin_bottom = 1437.0
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 955, 542 )
-
 [node name="changeMongoose" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/change_to_fire = SubResource( 2 )
 anims/change_to_garden = SubResource( 3 )
 anims/change_to_water = SubResource( 4 )
-anims/endMenu = SubResource( 5 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false

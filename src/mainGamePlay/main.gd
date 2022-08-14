@@ -72,5 +72,4 @@ func _on_changeMongoose_animation_finished(anim_name):
 
 
 func _on_Button_pressed(): # znikające menu
-	#$changeMongoose.play("endMenu")
 	pass

@@ -1,6 +1,7 @@
 extends Control
 
 var active: bool = true
+var column = 1
 
 func _ready():
 	pass # Replace with function body.
@@ -17,6 +18,34 @@ func power_if_active():
 		
 func powerON():
 	$power.play("powerON")
+	check_column_from_parent()
 	
 func powerOFF():
 	$power.play_backwards("powerON")
+	Global.watering_col1 = 0
+	Global.watering_col2 = 0
+	Global.watering_col3 = 0
+	Global.watering_col4 = 0
+	Global.watering_col5 = 0
+	Global.watering_col6 = 0
+	Global.watering_col7 = 0
+
+func check_column_from_parent():
+	column = get_parent().get_parent().column
+	print(column)
+	match column:
+		1:
+			Global.watering_col1 = 1
+		2:
+			Global.watering_col2 = 1
+		3:
+			Global.watering_col3 = 1
+		4:
+			Global.watering_col4 = 1
+		5:
+			Global.watering_col5 = 1
+		6:
+			Global.watering_col6 = 1
+		7:
+			Global.watering_col7 = 1
+		
