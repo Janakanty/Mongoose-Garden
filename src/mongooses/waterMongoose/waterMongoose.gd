@@ -32,7 +32,6 @@ func powerOFF():
 
 func check_column_from_parent():
 	column = get_parent().get_parent().column
-	print(column)
 	match column:
 		1:
 			Global.watering_col1 = 1

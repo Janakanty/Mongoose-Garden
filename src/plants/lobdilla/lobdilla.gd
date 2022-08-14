@@ -55,6 +55,7 @@ func grow_way(delta):
 
 func lose_way():
 	regres_bar.value = timer_down.time_left
+	regres_bar.show()
 
 func check_plant_condition():
 	#roślina zdycha
@@ -62,6 +63,9 @@ func check_plant_condition():
 		timer_down.stop()
 		to_small_plant_DEAD()
 	elif plant_condition <= 0 and plant_level == 1:
+		timer_down.stop()
+		to_plant_DEAD()
+	elif plant_condition <= 0 and plant_level == 2:
 		timer_down.stop()
 		to_plant_DEAD()
 	#roślina staje się zdechła
@@ -124,4 +128,16 @@ func _on_Timer_to_lose_timeout():
 	plant_condition = plant_condition - 1 
 	check_plant_condition()
 
+
+func _on_progres_value_changed(value):
+	regres_bar.hide()
+	if progres_bar.max_value == value:
+		if plant_condition == 1:
+			plant_condition = plant_condition + 1
+		elif plant_level == 0:
+			plant_level = 1
+		elif plant_level == 1:
+			plant_level = 2
+		progres_bar.value = 0
+		check_plant_condition()
 

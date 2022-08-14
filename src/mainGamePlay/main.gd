@@ -1,5 +1,8 @@
 extends Control
 
+onready var fire_mongoose = $mongooses/fire
+onready var water_mongoose = $mongooses/water
+onready var garden_mongoose = $mongooses/garden
 onready var mongooses = $mongooses
 var column = 1
 var mongoose_mode = 1 # 1 - water , 2 - fire , 3 - garderer
@@ -33,12 +36,18 @@ func change_mongoose_to_active():
 			1:
 				mongoose_mode = 2
 				$changeMongoose.play("change_to_fire")
+				water_mongoose.active = false
+				fire_mongoose.active = true
 			2:
 				mongoose_mode = 3
 				$changeMongoose.play("change_to_garden")
+				fire_mongoose.active = false
+				garden_mongoose.active = true
 			3:
 				mongoose_mode = 1
 				$changeMongoose.play("change_to_water")
+				garden_mongoose.active = false
+				water_mongoose.active = true
 		pass
 	
 func change_mongoose_position():

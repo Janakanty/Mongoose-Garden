@@ -17,6 +17,13 @@ func power_if_active():
 		
 func powerON():
 	$power.play("powerON")
+	Global.evaporating_col1 = 0
+	Global.evaporating_col2 = 0
+	Global.evaporating_col3 = 0
+	Global.evaporating_col4 = 0
+	Global.evaporating_col5 = 0
+	Global.evaporating_col6 = 0
+	Global.evaporating_col7 = 0
 	
 func powerOFF():
 	$power.play_backwards("powerON")
