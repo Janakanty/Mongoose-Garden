@@ -120,13 +120,13 @@ func to_plant_READY():
 	ready = 1
 
 func taken_off_the_board():
-	if ready == 1:
-		Global.point += 1
+	if ready == 1 or plant_condition == 0:
+		if ready == 1:
+			Global.point += 1
+			#fajny dźwięk
 		tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 		#tutaj zrobić aktualne punkty
-		
-	
 
 func reset_condition():
 	timer_down.start()
@@ -149,5 +149,5 @@ func _on_progres_value_changed(value):
 		check_plant_condition()
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_Tween_tween_completed(object, key):
 	queue_free()

@@ -31,27 +31,31 @@ func get_new_plant():
 		var rng = rand_number()
 		match rng:
 			0:
-				next_plant.rect_position = Vector2(211,360)
+				next_plant.rect_position.x = 211#Vector2(211,360)
 			1:
-				next_plant.rect_position = Vector2(454,360)
+				next_plant.rect_position.x = 454 #Vector2(454,360)
 			2:
-				next_plant.rect_position = Vector2(697,360)
+				next_plant.rect_position.x = 697 #Vector2(697,360)
 			3:
-				next_plant.rect_position = Vector2(940,360)
+				next_plant.rect_position.x = 940 #Vector2(940,360)
 			4:
-				next_plant.rect_position = Vector2(1183,360)
+				next_plant.rect_position.x = 1183 #Vector2(1183,360)
 			5:
-				next_plant.rect_position = Vector2(1426,360)
+				next_plant.rect_position.x = 1426 #Vector2(1426,360)
 			6:
-				next_plant.rect_position = Vector2(1669,360)
+				next_plant.rect_position.x = 1669 #Vector2(1669,360)
 		next_plant.my_column = rng + 1
 		plant_slots[rng] = 1
 		add_child(next_plant)
 		
 func gameplay_plan_machine():
 	get_new_plant()
+	set_plant()
+	get_new_plant()
+	plant = preload("res://src/plants/violik/violik.tscn")
 	get_new_plant()
 	
 func set_plant():
 	plant = preload("res://src/plants/lobdilla/lobdilla.tscn")
+	plant = preload("res://src/plants/bleedi/bleedi.tscn")
 		

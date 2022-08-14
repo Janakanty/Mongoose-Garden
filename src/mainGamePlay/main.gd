@@ -9,7 +9,7 @@ var mongoose_mode = 1 # 1 - water , 2 - fire , 3 - garderer
 var mongoose_is_changing = 0
 
 func _ready():
-	pass # Replace with function body.
+	$changeMongoose.play("RESET")
 
 func _input(event):
 	change_mongoose_position()
