@@ -177,14 +177,6 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 texture = ExtResource( 4 )
 
-[node name="plantControl" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="mongooses" type="Control" parent="."]
 margin_left = 231.0
 margin_right = 231.0
@@ -199,11 +191,19 @@ margin_bottom = 280.0
 
 [node name="garden" parent="mongooses" instance=ExtResource( 5 )]
 margin_top = -1046.0
-margin_bottom = -47.0
+margin_bottom = -46.9999
 
 [node name="fire" parent="mongooses" instance=ExtResource( 6 )]
 margin_top = 1094.0
 margin_bottom = 1437.0
+
+[node name="plantControl" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="changeMongoose" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )

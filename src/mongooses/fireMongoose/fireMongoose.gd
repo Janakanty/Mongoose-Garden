@@ -1,7 +1,6 @@
 extends Control
 
-var active: bool = true
-
+var active: bool = false
 func _ready():
 	pass # Replace with function body.
 

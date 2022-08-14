@@ -1,5 +1,6 @@
 extends Control
 
+onready var tween = get_node("Tween")
 
 #zmienne rośliny
 onready var regres_bar = $regres
@@ -11,10 +12,12 @@ var plant_level = 0 #poziom rośliny 0,1,2
 var plant_condition = 2 #stan rośliny
 var time_down = 5.0 # czas w którym roślina zdycha
 var ready = 0 #czy jest gotowa do wzicia 0 - nie, 1 - tak
+var my_x_position 
 
 
 func _ready():
 	timer_down.wait_time = time_down
+	my_x_position = rect_position.x
 
 func _process(delta):
 	lose_way()
@@ -119,7 +122,11 @@ func to_plant_READY():
 func taken_off_the_board():
 	if ready == 1:
 		Global.point += 1
-	queue_free()
+		tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()
+		#tutaj zrobić aktualne punkty
+		
+	
 
 func reset_condition():
 	timer_down.start()
@@ -141,3 +148,6 @@ func _on_progres_value_changed(value):
 		progres_bar.value = 0
 		check_plant_condition()
 
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	queue_free()

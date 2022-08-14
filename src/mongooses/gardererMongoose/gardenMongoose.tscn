@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/mongooses/gardererMongoose/gardenMongoose.gd" type="Script" id=1]
 [ext_resource path="res://graphics/mongooses/garden/gardener mongoose.png" type="Texture" id=2]
+[ext_resource path="res://graphics/mongooses/garden/gardener mongoose paws.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -29,22 +30,38 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -117, -2 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "powerON"
-length = 0.5
+length = 0.4
+step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("texture:modulate")
+tracks/0/path = NodePath(".:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.694118, 0.968627, 0.811765, 1 ) ]
+"values": [ Vector2( -117, -686 ), Vector2( -117, -55 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 114, 33 )
 
 [node name="mongoose" type="Control"]
 margin_left = -117.0
@@ -66,6 +83,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="pows" type="TextureRect" parent="."]
+visible = false
+anchor_top = 0.033
+anchor_right = 1.0
+anchor_bottom = 0.934
+margin_left = 32.0
+margin_top = 596.033
+margin_right = -30.0
+margin_bottom = -134.066
+texture = ExtResource( 3 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="power" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/powerON = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 3
+position = Vector2( 119, 714 )
+scale = Vector2( 1.01547, -1.04272 )
+texture = ExtResource( 3 )
+mode = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 122, 736 )
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

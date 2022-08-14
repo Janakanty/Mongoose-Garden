@@ -31,19 +31,19 @@ func get_new_plant():
 		var rng = rand_number()
 		match rng:
 			0:
-				next_plant.rect_position = Vector2(221,360)
+				next_plant.rect_position = Vector2(211,360)
 			1:
-				next_plant.rect_position = Vector2(464,360)
+				next_plant.rect_position = Vector2(454,360)
 			2:
-				next_plant.rect_position = Vector2(707,360)
+				next_plant.rect_position = Vector2(697,360)
 			3:
-				next_plant.rect_position = Vector2(950,360)
+				next_plant.rect_position = Vector2(940,360)
 			4:
-				next_plant.rect_position = Vector2(1193,360)
+				next_plant.rect_position = Vector2(1183,360)
 			5:
-				next_plant.rect_position = Vector2(1436,360)
+				next_plant.rect_position = Vector2(1426,360)
 			6:
-				next_plant.rect_position = Vector2(1679,360)
+				next_plant.rect_position = Vector2(1669,360)
 		next_plant.my_column = rng + 1
 		plant_slots[rng] = 1
 		add_child(next_plant)

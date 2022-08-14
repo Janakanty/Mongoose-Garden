@@ -1,6 +1,6 @@
 extends Control
 
-var active: bool = true
+var active: bool = false
 
 func _ready():
 	pass # Replace with function body.
@@ -20,3 +20,8 @@ func powerON():
 	
 func powerOFF():
 	$power.play_backwards("powerON")
+
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("plant"):
+		area.get_parent().taken_off_the_board()
