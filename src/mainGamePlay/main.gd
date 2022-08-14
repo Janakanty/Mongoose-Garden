@@ -10,6 +10,7 @@ var mongoose_is_changing = 0
 
 func _ready():
 	$changeMongoose.play("RESET")
+	$camera.play("slowMove")
 
 func _input(event):
 	change_mongoose_position()

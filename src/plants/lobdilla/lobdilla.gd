@@ -18,10 +18,12 @@ var my_x_position
 func _ready():
 	timer_down.wait_time = time_down
 	my_x_position = rect_position.x
+	timer_down.start()
 
 func _process(delta):
 	lose_way()
 	grow_way(delta)
+	
 
 
 func grow_way(delta):

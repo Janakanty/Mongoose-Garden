@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/mainGamePlay/main.gd" type="Script" id=1]
 [ext_resource path="res://src/mongooses/waterMongoose/waterMongoose.tscn" type="PackedScene" id=2]
@@ -156,6 +156,36 @@ tracks/1/keys = {
 "values": [ Vector2( -116, -351 ), Vector2( -116, -59 ) ]
 }
 
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "slowMove"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ) ]
+}
+
 [node name="main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -166,7 +196,10 @@ __meta__ = {
 }
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 955, 542 )
+position = Vector2( 959, 538 )
+scale = Vector2( 0.137986, 0.369949 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
 
 [node name="background" type="Control" parent="."]
 __meta__ = {
@@ -202,8 +235,6 @@ margin_right = 119.0
 margin_bottom = 280.0
 
 [node name="garden" parent="mongooses" instance=ExtResource( 5 )]
-margin_top = -1046.0
-margin_bottom = -46.9999
 
 [node name="fire" parent="mongooses" instance=ExtResource( 6 )]
 margin_top = 1094.0
@@ -246,6 +277,10 @@ margin_top = -81.2426
 margin_right = 208.214
 margin_bottom = 93.7574
 text = "PLAY"
+
+[node name="camera" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/slowMove = SubResource( 5 )
 
 [connection signal="animation_finished" from="changeMongoose" to="." method="_on_changeMongoose_animation_finished"]
 [connection signal="pressed" from="TextureRect/Button" to="." method="_on_Button_pressed"]

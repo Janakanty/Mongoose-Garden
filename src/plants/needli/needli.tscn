@@ -1,25 +1,29 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/plants/needli/needli.gd" type="Script" id=1]
-[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka OK.png" type="Texture" id=2]
-[ext_resource path="res://graphics/plants/lobdilla/lobdilla doniczka.png" type="Texture" id=3]
-[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka DEAD.png" type="Texture" id=4]
-[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA BAD.png" type="Texture" id=5]
-[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA DEAD.png" type="Texture" id=6]
-[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka BAD.png" type="Texture" id=7]
-[ext_resource path="res://graphics/plants/lobdilla/LOBDILLA OK.png" type="Texture" id=8]
+[ext_resource path="res://graphics/plants/needli/NEEDLI OK.png" type="Texture" id=2]
+[ext_resource path="res://graphics/plants/needli/NEEDLI BAD.png" type="Texture" id=3]
+[ext_resource path="res://graphics/plants/needli/NEEDLI DEAD.png" type="Texture" id=4]
+[ext_resource path="res://graphics/plants/needli/NEEDLI sadzonka DEAD.png" type="Texture" id=5]
+[ext_resource path="res://graphics/plants/needli/NEEDLI sadzonka OK.png" type="Texture" id=6]
+[ext_resource path="res://graphics/plants/needli/NEEDLI sadzonka BAD.png" type="Texture" id=7]
+[ext_resource path="res://graphics/plants/needli/needli doniczka.png" type="Texture" id=8]
 [ext_resource path="res://src/plants/stars.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/plants/x.tscn" type="PackedScene" id=10]
+[ext_resource path="res://graphics/interface/progresBar.png" type="Texture" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 68, 28.5 )
 
 [node name="plant" type="Control"]
-anchor_left = -0.036
+anchor_left = -0.048
 anchor_top = 0.001
 anchor_right = 0.052
 anchor_bottom = 0.515
-margin_left = -23.88
-margin_top = -0.08
-margin_right = -22.84
-margin_bottom = 0.799927
+margin_left = -5.84
+margin_top = 375.92
+margin_right = -27.84
+margin_bottom = 376.8
 rect_pivot_offset = Vector2( 93, 0 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -29,12 +33,40 @@ __meta__ = {
 [node name="flowerPot" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 3 )
+texture = ExtResource( 8 )
+
+[node name="progres" type="TextureProgress" parent="."]
+margin_left = 79.0
+margin_top = 334.0
+margin_right = 149.0
+margin_bottom = 404.0
+max_value = 30.0
+step = 0.1
+texture_progress = ExtResource( 11 )
+fill_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="regres" type="TextureProgress" parent="."]
+margin_left = 79.0
+margin_top = 334.0
+margin_right = 149.0
+margin_bottom = 404.0
+max_value = 25.0
+step = 0.01
+value = 5.0
+texture_progress = ExtResource( 11 )
+fill_mode = 3
+tint_progress = Color( 0.247059, 0.32549, 0.85098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="smallPlantOK" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -52,7 +84,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -63,7 +95,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 8 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,7 +104,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -81,7 +113,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -92,15 +124,30 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 8 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="stars" parent="plantREADY" instance=ExtResource( 9 )]
+margin_left = 34.0
+margin_top = -13.0
+margin_right = 34.0
+margin_bottom = -13.0
 
 [node name="Timer_to_lose" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
+[node name="Area2D" type="Area2D" parent="." groups=["plant"]]
+position = Vector2( -7.62939e-06, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 116, 308 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="value_changed" from="progres" to="." method="_on_progres_value_changed"]
 [connection signal="timeout" from="Timer_to_lose" to="." method="_on_Timer_to_lose_timeout"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

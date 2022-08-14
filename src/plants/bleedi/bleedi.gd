@@ -14,10 +14,13 @@ var time_down = 10.0 # czas w którym roślina zdycha
 var ready = 0 #czy jest gotowa do wzicia 0 - nie, 1 - tak
 var my_x_position 
 
+var bleedi_added_condition = 0
+
 
 func _ready():
 	timer_down.wait_time = time_down
 	my_x_position = rect_position.x
+	timer_down.start()
 
 func _process(delta):
 	lose_way()
@@ -137,14 +140,15 @@ func _on_Timer_to_lose_timeout():
 
 
 func _on_progres_value_changed(value):
-	print("ładowanko")
 	regres_bar.hide()
 	if progres_bar.max_value == value:
 		if plant_condition == 1:
 			plant_condition = plant_condition + 1
 		elif plant_level == 0:
 			plant_level = 1
-		elif plant_level == 1:
+		elif plant_level == 1 and bleedi_added_condition == 0:
+			bleedi_added_condition = 1
+		elif plant_level == 1 and bleedi_added_condition == 1:
 			plant_level = 2
 		progres_bar.value = 0
 		check_plant_condition()

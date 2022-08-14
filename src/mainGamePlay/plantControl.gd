@@ -54,6 +54,12 @@ func gameplay_plan_machine():
 	get_new_plant()
 	plant = preload("res://src/plants/violik/violik.tscn")
 	get_new_plant()
+	plant = preload("res://src/plants/needli/needli.tscn")
+	get_new_plant()
+	plant = preload("res://src/plants/blumlit/blumlit.tscn")
+	get_new_plant()
+	plant = preload("res://src/plants/bleblo/bleblo.tscn")
+	get_new_plant()
 	
 func set_plant():
 	plant = preload("res://src/plants/lobdilla/lobdilla.tscn")
