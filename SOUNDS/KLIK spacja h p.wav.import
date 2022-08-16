@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/KLIK spacja h p.wav-f123db3f00d4f9d3e74bc6a97b4f1312.sample"
+
+[deps]
+
+source_file="res://SOUNDS/KLIK spacja h p.wav"
+dest_files=[ "res://.import/KLIK spacja h p.wav-f123db3f00d4f9d3e74bc6a97b4f1312.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

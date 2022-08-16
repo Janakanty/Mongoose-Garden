@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/kaja_wywiad.mp3-702e90fb256ce1943cf3b9de31caef7a.mp3str"
+
+[deps]
+
+source_file="res://graphics/mongooses/water/kaja_wywiad.mp3"
+dest_files=[ "res://.import/kaja_wywiad.mp3-702e90fb256ce1943cf3b9de31caef7a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

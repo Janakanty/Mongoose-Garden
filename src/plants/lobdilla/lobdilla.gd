@@ -18,13 +18,11 @@ var my_x_position
 func _ready():
 	timer_down.wait_time = time_down
 	my_x_position = rect_position.x
-	timer_down.start()
-
+	timer_down.paused = true
 func _process(delta):
 	lose_way()
 	grow_way(delta)
 	
-
 
 func grow_way(delta):
 	#każda roślina ma swój specjalny grow way
@@ -101,6 +99,7 @@ func to_small_plant_BAD():
 func to_small_plant_DEAD():
 	$smallPlantBAD.hide()
 	$smallPlantDEAD.show()
+	$AudioStreamPlayer.play()
 	
 func to_plant_OK():
 	$smallPlantOK.hide()
@@ -115,6 +114,7 @@ func to_plant_BAD():
 func to_plant_DEAD():
 	$plantBAD.hide()
 	$plantDEAD.show()
+	$AudioStreamPlayer.play()
 	
 func to_plant_READY():
 	$plantOK.hide()
@@ -124,7 +124,7 @@ func to_plant_READY():
 func taken_off_the_board():
 	if ready == 1 or plant_condition == 0:
 		if ready == 1:
-			Global.point += 1
+			get_point()
 			#fajny dźwięk
 		tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
@@ -132,6 +132,10 @@ func taken_off_the_board():
 
 func reset_condition():
 	timer_down.start()
+
+func get_point():
+	Global.point += 1
+	Global.refresh_point()
 
 func _on_Timer_to_lose_timeout():
 	plant_condition = plant_condition - 1 
@@ -152,4 +156,6 @@ func _on_progres_value_changed(value):
 
 
 func _on_Tween_tween_completed(object, key):
+	get_parent().plant_slots[my_column-1] = 0
 	queue_free()
+	

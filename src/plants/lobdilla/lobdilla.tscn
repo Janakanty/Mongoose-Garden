@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/plants/lobdilla/lobdilla.gd" type="Script" id=1]
 [ext_resource path="res://graphics/plants/lobdilla/LOBDILLA sadzonka OK.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/plants/stars.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/plants/x.tscn" type="PackedScene" id=10]
 [ext_resource path="res://graphics/interface/progresBar.png" type="Texture" id=11]
+[ext_resource path="res://SOUNDS/O-o!.wav" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 92, 17 )
@@ -146,6 +147,9 @@ position = Vector2( 91, 332 )
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
 
 [connection signal="value_changed" from="progres" to="." method="_on_progres_value_changed"]
 [connection signal="timeout" from="Timer_to_lose" to="." method="_on_Timer_to_lose_timeout"]

@@ -17,6 +17,7 @@ func power_if_active():
 		
 func powerON():
 	$power.play("powerON")
+	$AudioStreamPlayer.play()
 	
 func powerOFF():
 	$power.play_backwards("powerON")

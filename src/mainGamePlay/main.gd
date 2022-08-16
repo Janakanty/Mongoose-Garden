@@ -8,14 +8,28 @@ var column = 1
 var mongoose_mode = 1 # 1 - water , 2 - fire , 3 - garderer
 var mongoose_is_changing = 0
 
+var game_pause = false
+var menu_active = 1
+
 func _ready():
 	$changeMongoose.play("RESET")
 	$camera.play("slowMove")
+	
+		
 
 func _input(event):
-	change_mongoose_position()
-	quit()
-	change_mongoose_to_active()
+		change_mongoose_position()
+		quit()
+		change_mongoose_to_active()
+		space_menu_start_game()
+	
+func space_menu_start_game():
+	if Input.is_action_just_pressed("space"):
+		$menu2.play("start_game")
+		yield(get_tree().create_timer(3), "timeout")
+		$TextureRect2.hide()
+		menu_active = 0
+		get_node("plantControl").gameplay_plan_machine()
 	
 func quit():
 	if Input.is_action_pressed("quit"):
@@ -53,9 +67,11 @@ func change_mongoose_to_active():
 	
 func change_mongoose_position():
 	if Input.is_action_just_pressed("left") and column > 1:
+		$AudioStreamPlayer2.play()
 		column = column - 1
 		check_mognoose_position()
 	elif Input.is_action_just_pressed("right") and column < 7:
+		$AudioStreamPlayer2.play()
 		column = column + 1
 		check_mognoose_position()
 
@@ -76,6 +92,13 @@ func check_mognoose_position():
 		7:
 			mongooses.rect_position.x = 1689
 
+func end_game():
+	if Global.point >= 500:
+		pass
+		#win
+	if Global.life <= 0:
+		pass
+		#false
 
 func _on_changeMongoose_animation_finished(anim_name):
 	mongoose_is_changing = 0
@@ -83,3 +106,5 @@ func _on_changeMongoose_animation_finished(anim_name):
 
 func _on_Button_pressed(): # znikające menu
 	pass
+
+

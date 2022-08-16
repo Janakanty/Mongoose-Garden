@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/mongooses/fireMongoose/fireMongoose.gd" type="Script" id=1]
+[ext_resource path="res://graphics/mongooses/fire/fire mongoose fire mode.png" type="Texture" id=2]
 [ext_resource path="res://graphics/mongooses/fire/fire mongoose.png" type="Texture" id=3]
+[ext_resource path="res://graphics/mongooses/fire/fire mongoose fire.png" type="Texture" id=4]
+[ext_resource path="res://src/plants/mug.tscn" type="PackedScene" id=5]
+[ext_resource path="res://SOUNDS/PARA.wav" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -17,10 +21,59 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextureRect:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -77, 306 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -5.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("stars:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "powerON"
 length = 0.5
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("texture:modulate")
 tracks/0/interp = 1
@@ -33,14 +86,93 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.956863, 0.654902, 0.654902, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextureRect:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.18, 0.2, 0.22, 0.25, 0.28, 0.31, 0.33, 0.35, 0.38, 0.4, 0.42, 0.45, 0.47, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 0.87055, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.87055, 1 ),
+"update": 0,
+"values": [ Vector2( -77, 306 ), Vector2( -69, -67 ), Vector2( -84, -67 ), Vector2( -71, -67 ), Vector2( -75, -67 ), Vector2( -69, -52 ), Vector2( -84, -53 ), Vector2( -66, -59 ), Vector2( -78, -59 ), Vector2( -63, -64 ), Vector2( -79, -65 ), Vector2( -82, -66 ), Vector2( -84, -67 ), Vector2( -71, -67 ), Vector2( -75, -67 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("stars:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.14902 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "powerON2"
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.51 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, -1.0 ]
+}
 
 [node name="mongoose" type="Control"]
 margin_left = -116.0
 margin_top = -1.0
 margin_right = 118.0
 margin_bottom = 342.0
+rect_rotation = 5.0
 rect_pivot_offset = Vector2( 116, 0 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -77.0
+margin_top = 306.0
+margin_right = 323.0
+margin_bottom = 665.0
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -48,7 +180,10 @@ __meta__ = {
 [node name="texture" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 3.198
-margin_bottom = -736.914
+margin_left = 7.0
+margin_top = 19.0
+margin_right = 7.0
+margin_bottom = -717.914
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -57,3 +192,24 @@ __meta__ = {
 [node name="power" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/powerON = SubResource( 2 )
+
+[node name="power2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/powerON2 = SubResource( 4 )
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stars" parent="." instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 56.7677
+margin_top = -448.514
+margin_right = 56.7677
+margin_bottom = -448.514
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )

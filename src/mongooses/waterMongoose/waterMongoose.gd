@@ -3,9 +3,6 @@ extends Control
 var active: bool = true
 var column = 1
 
-func _ready():
-	pass # Replace with function body.
-
 func _input(event):
 	power_if_active()
 
@@ -19,9 +16,13 @@ func power_if_active():
 func powerON():
 	$power.play("powerON")
 	check_column_from_parent()
+	$ColorRect/Particles2D.emitting = true
+	$AudioStreamPlayer.play()
 	
 func powerOFF():
-	$power.play_backwards("powerON")
+	$power.stop()
+	$AudioStreamPlayer.stop()
+	$ColorRect/Particles2D.emitting = false
 	Global.watering_col1 = 0
 	Global.watering_col2 = 0
 	Global.watering_col3 = 0

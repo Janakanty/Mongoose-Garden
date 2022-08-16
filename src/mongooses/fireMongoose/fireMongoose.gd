@@ -17,11 +17,19 @@ func power_if_active():
 		
 func powerON():
 	$power.play("powerON")
+	$power2.play("powerON2")
 	check_column_from_parent()
-	
+	get_parent().get_node("water").get_node("power").play("powerON")
+	get_parent().get_node("water").get_node("ColorRect").get_node("Particles2D").emitting = true
+	$AudioStreamPlayer.play()
+
 	
 func powerOFF():
+	get_parent().get_node("water").get_node("power").stop()
+	get_parent().get_node("water").get_node("ColorRect").get_node("Particles2D").emitting = false
 	$power.play_backwards("powerON")
+	$power2.stop()
+	$AudioStreamPlayer.stop()
 	Global.evaporating_col1 = 0
 	Global.evaporating_col2 = 0
 	Global.evaporating_col3 = 0

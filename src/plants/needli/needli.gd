@@ -15,6 +15,7 @@ var ready = 0 #czy jest gotowa do wzicia 0 - nie, 1 - tak
 var my_x_position 
 
 var mode = 0 # 0 - water mode 1 - steam
+var needli_added_condition = 0 # 0,1 - water ; 2,3 - steam 
 
 func _ready():
 	timer_down.wait_time = time_down
@@ -28,36 +29,66 @@ func _process(delta):
 
 func grow_way(delta):
 	#każda roślina ma swój specjalny grow way
-	match my_column:
-		1:
-			if Global.evaporating_col1 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-		2:
-			if Global.evaporating_col2 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-		3:
-			if Global.evaporating_col3 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-		4:
-			if Global.evaporating_col4 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-		5:
-			if Global.evaporating_col5 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-		6:
-			if Global.evaporating_col6 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-		7:
-			if Global.evaporating_col7 == 1:
-				progres_bar.value += 10 * delta
-				reset_condition()
-
+	if mode == 0: 
+		match my_column:
+			1:
+				if Global.watering_col1 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			2:
+				if Global.watering_col2 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			3:
+				if Global.watering_col3 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			4:
+				if Global.watering_col4 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			5:
+				if Global.watering_col5 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			6:
+				if Global.watering_col6 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			7:
+				if Global.watering_col7 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+	else:	
+		match my_column:
+			1:
+				if Global.evaporating_col1 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			2:
+				if Global.evaporating_col2 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			3:
+				if Global.evaporating_col3 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			4:
+				if Global.evaporating_col4 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			5:
+				if Global.evaporating_col5 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			6:
+				if Global.evaporating_col6 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
+			7:
+				if Global.evaporating_col7 == 1:
+					progres_bar.value += 10 * delta
+					reset_condition()
 func lose_way():
 	regres_bar.value = timer_down.time_left
 	regres_bar.show()
@@ -124,7 +155,7 @@ func to_plant_READY():
 func taken_off_the_board():
 	if ready == 1 or plant_condition == 0:
 		if ready == 1:
-			Global.point += 1
+			get_point()
 			#fajny dźwięk
 		tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
@@ -132,6 +163,10 @@ func taken_off_the_board():
 
 func reset_condition():
 	timer_down.start()
+
+func get_point():
+	Global.point += 20
+	Global.refresh_point()
 
 func _on_Timer_to_lose_timeout():
 	plant_condition = plant_condition - 1 
@@ -145,10 +180,30 @@ func _on_progres_value_changed(value):
 			plant_condition = plant_condition + 1
 		elif plant_level == 0:
 			plant_level = 1
-		elif plant_level == 1:
+			needli_added_condition = 1
+		elif plant_level == 1 and needli_added_condition == 1:
+			needli_added_condition = 2
+			change_mode()
+		elif plant_level == 1 and needli_added_condition == 2:
+			needli_added_condition = 3
+			change_mode()
+		elif plant_level == 1 and needli_added_condition == 3:
+			needli_added_condition = 4
+			change_mode()
+		elif plant_level == 1 and needli_added_condition == 4:
 			plant_level = 2
 		progres_bar.value = 0
+		change_mode()
 		check_plant_condition()
 
 func _on_Tween_tween_completed(object, key):
+	get_parent().plant_slots[my_column-1] = 0
 	queue_free()
+
+func change_mode():
+	if needli_added_condition < 2: #water mode
+		mode = 0
+		$regres.tint_progress = Color(0.24,0.32,0.85,1)
+	else: 
+		mode = 1
+		$regres.tint_progress = Color(0.90,0.27,0.27,1)

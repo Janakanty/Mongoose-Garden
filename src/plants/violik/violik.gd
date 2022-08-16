@@ -124,7 +124,7 @@ func to_plant_READY():
 func taken_off_the_board():
 	if ready == 1 or plant_condition == 0:
 		if ready == 1:
-			Global.point += 1
+			get_point()
 			#fajny dźwięk
 		tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
@@ -132,6 +132,10 @@ func taken_off_the_board():
 
 func reset_condition():
 	timer_down.start()
+
+func get_point():
+	Global.point += 10
+	Global.refresh_point()
 
 func _on_Timer_to_lose_timeout():
 	plant_condition = plant_condition - 1 
@@ -153,4 +157,5 @@ func _on_progres_value_changed(value):
 		check_plant_condition()
 
 func _on_Tween_tween_completed(object, key):
+	get_parent().plant_slots[my_column-1] = 0
 	queue_free()

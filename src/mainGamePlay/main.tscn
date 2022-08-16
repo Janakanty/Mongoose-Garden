@@ -1,13 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/mainGamePlay/main.gd" type="Script" id=1]
 [ext_resource path="res://src/mongooses/waterMongoose/waterMongoose.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/mainGamePlay/plantControl.gd" type="Script" id=3]
-[ext_resource path="res://graphics/background/background UPDATE.png" type="Texture" id=4]
+[ext_resource path="res://graphics/background/background UPDATE2.png" type="Texture" id=4]
 [ext_resource path="res://src/mongooses/gardererMongoose/gardenMongoose.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/mongooses/fireMongoose/fireMongoose.tscn" type="PackedScene" id=6]
-[ext_resource path="res://graphics/menu/menuBackground.png" type="Texture" id=7]
+[ext_resource path="res://untitled.wav" type="AudioStream" id=7]
 [ext_resource path="res://graphics/background/PÓŁKA.png" type="Texture" id=8]
+[ext_resource path="res://graphics/pointsFont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://graphics/menu/MAIN.png" type="Texture" id=10]
+[ext_resource path="res://graphics/interface/sterowanie.png" type="Texture" id=11]
+[ext_resource path="res://notes.tscn" type="PackedScene" id=12]
+[ext_resource path="res://SOUNDS/ruch w bok.wav" type="AudioStream" id=13]
+[ext_resource path="res://SOUNDS/mangusci spiew.wav" type="AudioStream" id=14]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -46,18 +52,6 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -117, -1046 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("TextureRect:rect_position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -182, -51 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -156,6 +150,36 @@ tracks/1/keys = {
 "values": [ Vector2( -116, -351 ), Vector2( -116, -59 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("menu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "start_game"
+tracks/0/type = "value"
+tracks/0/path = NodePath("menu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2.37841, 2.37841 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -2113, 0 ) ]
+}
+
 [sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
@@ -230,8 +254,9 @@ __meta__ = {
 }
 
 [node name="water" parent="mongooses" instance=ExtResource( 2 )]
+margin_left = -116.0
 margin_top = -59.0
-margin_right = 119.0
+margin_right = 3.0
 margin_bottom = 280.0
 
 [node name="garden" parent="mongooses" instance=ExtResource( 5 )]
@@ -248,39 +273,91 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="point" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.896
+anchor_top = 0.038
+anchor_right = 0.965
+anchor_bottom = 0.113
+margin_left = 1.67993
+margin_top = 11.96
+margin_right = -21.8
+margin_bottom = -5.04001
+custom_fonts/font = ExtResource( 9 )
+text = "0"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -526.0
+margin_top = -419.0
+margin_right = 517.0
+margin_bottom = 452.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 24960.0
+margin_bottom = 14040.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" parent="." instance=ExtResource( 12 )]
+visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -13.109
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -19.227
+autoplay = true
+
 [node name="changeMongoose" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/change_to_fire = SubResource( 2 )
 anims/change_to_garden = SubResource( 3 )
 anims/change_to_water = SubResource( 4 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-margin_left = -182.0
-margin_top = -51.0
-margin_right = 1897.0
-margin_bottom = 1029.0
-rect_scale = Vector2( 1.11824, 1.11824 )
-texture = ExtResource( 7 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="TextureRect"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -199.786
-margin_top = -81.2426
-margin_right = 208.214
-margin_bottom = 93.7574
-text = "PLAY"
+[node name="menu2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/start_game = SubResource( 8 )
 
 [node name="camera" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )
 anims/slowMove = SubResource( 5 )
 
+[node name="gameplayMachineTime" type="Timer" parent="."]
+wait_time = 12.0
+autostart = true
+
 [connection signal="animation_finished" from="changeMongoose" to="." method="_on_changeMongoose_animation_finished"]
-[connection signal="pressed" from="TextureRect/Button" to="." method="_on_Button_pressed"]
+[connection signal="animation_finished" from="menu2" to="." method="_on_menu2_animation_finished"]
+[connection signal="timeout" from="gameplayMachineTime" to="plantControl" method="_on_gameplayMachineTime_timeout"]
