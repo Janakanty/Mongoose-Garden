@@ -1,26 +1,174 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/plants/plant/plant.gd" type="Script" id=1]
+[ext_resource path="res://graphics/plants/blumlit/BLUMLIT sadzonka DEAD.png" type="Texture" id=2]
+[ext_resource path="res://graphics/plants/blumlit/blumlit doniczka.png" type="Texture" id=3]
+[ext_resource path="res://graphics/plants/blumlit/BLUMLIT sadzonka OK.png" type="Texture" id=4]
+[ext_resource path="res://graphics/plants/blumlit/BLUMLIT sadzonka BAD.png" type="Texture" id=5]
+[ext_resource path="res://graphics/plants/blumlit/BLUMLIT BAD.png" type="Texture" id=6]
+[ext_resource path="res://graphics/plants/blumlit/BLUMLIT OK.png" type="Texture" id=7]
+[ext_resource path="res://graphics/plants/blumlit/BLUMLIT DEAD.png" type="Texture" id=8]
+[ext_resource path="res://src/plants/stars.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/plants/x.tscn" type="PackedScene" id=10]
+[ext_resource path="res://graphics/interface/progresBar.png" type="Texture" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 69.5, 17 )
 
 [node name="plant" type="Control"]
+light_mask = 3
 anchor_left = -0.036
 anchor_top = 0.001
-anchor_right = 0.035
-anchor_bottom = 0.183
-margin_left = -0.880013
-margin_top = -1.08
-margin_right = 0.799995
-margin_bottom = -0.640015
-rect_pivot_offset = Vector2( 70, 0 )
+anchor_right = 0.052
+anchor_bottom = 0.614
+margin_left = -18.88
+margin_top = 408.92
+margin_right = -18.88
+margin_bottom = 408.92
+rect_pivot_offset = Vector2( 93, 0 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.384314, 0.670588, 0.14902, 1 )
+[node name="textures" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="flowerPot" type="TextureRect" parent="textures"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="progres" type="TextureProgress" parent="textures"]
+margin_left = 60.0
+margin_top = 305.0
+margin_right = 130.0
+margin_bottom = 375.0
+max_value = 30.0
+step = 0.1
+texture_progress = ExtResource( 11 )
+fill_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="regres" type="TextureProgress" parent="textures"]
+margin_left = 60.0
+margin_top = 305.0
+margin_right = 130.0
+margin_bottom = 375.0
+max_value = 30.0
+step = 0.01
+value = 20.0
+texture_progress = ExtResource( 11 )
+fill_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="smallPlantOK" type="TextureRect" parent="textures"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="smallPlantBAD" type="TextureRect" parent="textures"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="smallPlantDEAD" type="TextureRect" parent="textures"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="x" parent="textures/smallPlantDEAD" instance=ExtResource( 10 )]
+
+[node name="plantOK" type="TextureRect" parent="textures"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="plantBAD" type="TextureRect" parent="textures"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="plantDEAD" type="TextureRect" parent="textures"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="x" parent="textures/plantDEAD" instance=ExtResource( 10 )]
+
+[node name="plantREADY" type="TextureRect" parent="textures"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 145.0
+margin_bottom = 456.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stars" parent="textures/plantREADY" instance=ExtResource( 9 )]
+
+[node name="Timer_to_lose" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["plant"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 91.5, 286 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="value_changed" from="textures/progres" to="." method="_on_progres_value_changed"]
+[connection signal="timeout" from="Timer_to_lose" to="." method="_on_Timer_to_lose_timeout"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

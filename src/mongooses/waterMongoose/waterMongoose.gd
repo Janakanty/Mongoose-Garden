@@ -1,7 +1,7 @@
 extends Control
 
 var active: bool = true
-var column = 1
+var column: int = 1
 
 func _input(event):
 	power_if_active()
@@ -31,7 +31,7 @@ func powerOFF():
 	Global.watering_col6 = 0
 	Global.watering_col7 = 0
 
-func check_column_from_parent():
+func check_column_from_parent(): 
 	column = get_parent().get_parent().column
 	match column:
 		1:

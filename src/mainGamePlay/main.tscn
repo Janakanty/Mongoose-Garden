@@ -150,36 +150,6 @@ tracks/1/keys = {
 "values": [ Vector2( -116, -351 ), Vector2( -116, -59 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("menu:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=8]
-resource_name = "start_game"
-tracks/0/type = "value"
-tracks/0/path = NodePath("menu:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2.37841, 2.37841 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -2113, 0 ) ]
-}
-
 [sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
@@ -210,20 +180,43 @@ tracks/0/keys = {
 "values": [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("menu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "menu_hide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("menu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 4.28709, 4.28709 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1940, 0 ) ]
+}
+
 [node name="main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [ 1203.0 ]
+"_edit_use_anchors_": false
 }
-
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 959, 538 )
-scale = Vector2( 0.137986, 0.369949 )
-current = true
-zoom = Vector2( 0.5, 0.5 )
 
 [node name="background" type="Control" parent="."]
 __meta__ = {
@@ -246,6 +239,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="point" type="Label" parent="background"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.896
+anchor_top = 0.038
+anchor_right = 0.965
+anchor_bottom = 0.113
+margin_left = 1722.0
+margin_top = 53.0
+margin_right = 1825.0
+margin_bottom = 117.0
+custom_fonts/font = ExtResource( 9 )
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="mongooses" type="Control" parent="."]
 margin_left = 231.0
 margin_right = 231.0
@@ -260,6 +270,8 @@ margin_right = 3.0
 margin_bottom = 280.0
 
 [node name="garden" parent="mongooses" instance=ExtResource( 5 )]
+margin_top = -1046.0
+margin_bottom = -47.0
 
 [node name="fire" parent="mongooses" instance=ExtResource( 6 )]
 margin_top = 1094.0
@@ -273,25 +285,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="point" type="Label" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.896
-anchor_top = 0.038
-anchor_right = 0.965
-anchor_bottom = 0.113
-margin_left = 1.67993
-margin_top = 11.96
-margin_right = -21.8
-margin_bottom = -5.04001
-custom_fonts/font = ExtResource( 9 )
-text = "0"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="started_instruction" type="TextureRect" parent="."]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -306,12 +300,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="menu" type="Control" parent="."]
+[node name="instruction" parent="." instance=ExtResource( 12 )]
 visible = false
+
+[node name="menu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 24960.0
-margin_bottom = 14040.0
+margin_right = 55680.0
+margin_bottom = 31320.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -324,21 +320,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" parent="." instance=ExtResource( 12 )]
-visible = false
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -80.0
 autoplay = true
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="changeColumnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
-volume_db = -13.109
+volume_db = -80.0
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -19.227
+volume_db = -80.0
 autoplay = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 959, 538 )
+scale = Vector2( 0.137986, 0.369949 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
 
 [node name="changeMongoose" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
@@ -346,18 +346,19 @@ anims/change_to_fire = SubResource( 2 )
 anims/change_to_garden = SubResource( 3 )
 anims/change_to_water = SubResource( 4 )
 
-[node name="menu2" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 7 )
-anims/start_game = SubResource( 8 )
-
 [node name="camera" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )
 anims/slowMove = SubResource( 5 )
+
+[node name="menu_anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/menu_hide = SubResource( 8 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="gameplayMachineTime" type="Timer" parent="."]
 wait_time = 12.0
 autostart = true
 
 [connection signal="animation_finished" from="changeMongoose" to="." method="_on_changeMongoose_animation_finished"]
-[connection signal="animation_finished" from="menu2" to="." method="_on_menu2_animation_finished"]
 [connection signal="timeout" from="gameplayMachineTime" to="plantControl" method="_on_gameplayMachineTime_timeout"]

@@ -28,4 +28,4 @@ var evaporating_col7 = 0
 
 func refresh_point():
 	print(point)
-	get_parent().get_node("/root/main/point").text = str(point)
+	get_parent().get_node("/root/main/background/point").text = str(point)
