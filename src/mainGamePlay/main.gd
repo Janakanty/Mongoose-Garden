@@ -10,6 +10,8 @@ var column = 1               # kolumna na której aktualnie jest mangusta
 var mongoose_mode = 1        # 1 - water , 2 - fire , 3 - garderer
 var mongoose_is_changing = 0 # zmienna nie pozwalająca uruchomić kolejnej animacji jeżeli aktualna się jeszcze nie skoczyła.  
 var menu_hide = 0
+var position_x_column_array = [231, 474, 717, 960, 1203, 1446, 1689]
+
 
 func _ready():
 		$changeMongoose.play("RESET") #reset pozycji mangust. Czasem źle się ustawiają. 
@@ -24,8 +26,6 @@ func _unhandled_input(event):
 
 func _input(event):
 		space_menu_start_game()
-		
-		
 
 
 # FUNKCJE STERUJĄCE
@@ -74,35 +74,9 @@ func quit():
 				get_tree().quit()
 
 
-func check_mognoose_position(): # funkcja pomocnicza dla - change_mongoose_position()
-		match column:
-				1:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(231,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-				2:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(474,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-					#mongooses.rect_position.x = 474
-				3:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(717,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-					#mongooses.rect_position.x = 717
-				4:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(960,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-					#mongooses.rect_position.x = 960
-				5:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(1203,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-					#mongooses.rect_position.x = 1203
-				6:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(1446,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-					#mongooses.rect_position.x = 1446
-				7:
-					tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(1689,0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
-					tween.start()
-					#mongooses.rect_position.x = 1689
+func check_mognoose_position():
+		tween.interpolate_property($mongooses, "rect_global_position", null, Vector2(position_x_column_array[column-1],0), 0.3, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
+		tween.start()
 
 #FUNKCJE 
 
