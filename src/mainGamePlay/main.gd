@@ -18,13 +18,13 @@ func _ready():
 		$camera.play("slowMove")      # efekt kamery na pocztku rozgrywki
 
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 		change_mongoose_position()
 		change_mongoose_to_active()
 		quit()
 
 
-func _input(event):
+func _input(_event):
 		space_menu_start_game()
 
 
@@ -89,6 +89,6 @@ func end_game():
 				#false
 
 
-func _on_changeMongoose_animation_finished(anim_name):
+func _on_changeMongoose_animation_finished(_anim_name):
 		mongoose_is_changing = 0
 

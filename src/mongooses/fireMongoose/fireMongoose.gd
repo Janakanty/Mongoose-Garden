@@ -5,7 +5,7 @@ var column = 1
 func _ready():
 	pass # Replace with function body.
 
-func _input(event):
+func _input(_event):
 	power_if_active()
 
 func power_if_active():

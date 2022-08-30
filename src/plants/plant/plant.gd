@@ -199,7 +199,7 @@ func LOBDILLA(): # LOAD CZY PRELOAD? OTO JEST PTANIE
 		$textures/plantDEAD.texture = load("res://graphics/plants/lobdilla/LOBDILLA DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/lobdilla/LOBDILLA OK.png")
 
-func progress_max_value_LOBDILLA(value):
+func progress_max_value_LOBDILLA(_value):
 		if plant_condition == 1:
 			plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -230,7 +230,7 @@ func BLEEDI():
 		$textures/plantDEAD.texture = load("res://graphics/plants/bleedi/BLEEDI DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/bleedi/BLEEDI OK.png")
 
-func progress_max_value_BLEEDI(value):
+func progress_max_value_BLEEDI(_value):
 		if plant_condition == 1:
 			plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -264,7 +264,7 @@ func VIOLIK():
 		$textures/plantDEAD.texture = load("res://graphics/plants/violik/VIOLIK DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/violik/VIOLIK OK.png")
 
-func progress_max_value_VIOLIK(value):
+func progress_max_value_VIOLIK(_value):
 		if plant_condition == 1:
 			plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -296,7 +296,7 @@ func NEEDLI():
 		$textures/plantDEAD.texture = load("res://graphics/plants/needli/NEEDLI DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/needli/NEEDLI OK.png")
 
-func progress_max_value_NEEDLI(value):
+func progress_max_value_NEEDLI(_value):
 		if plant_condition == 1:
 				plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -343,7 +343,7 @@ func BLUMLIT():
 		$textures/plantDEAD.texture = load("res://graphics/plants/blumlit/BLUMLIT DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/blumlit/BLUMLIT OK.png")
 
-func progress_max_value_BLUMLIT(value):
+func progress_max_value_BLUMLIT(_value):
 		if plant_condition == 1:
 				plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -385,6 +385,6 @@ func _on_progres_value_changed(value):
 				check_plant_condition()
 
 
-func _on_Tween_tween_completed(object, key):
+func _on_Tween_tween_completed(_object, _key):
 		get_parent().plant_slots[my_column-1] = 0
 		queue_free()

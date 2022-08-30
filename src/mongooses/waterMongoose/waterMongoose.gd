@@ -3,7 +3,7 @@ extends Control
 var active: bool = true
 var column: int = 1
 
-func _input(event):
+func _input(_event):
 	power_if_active()
 
 func power_if_active():
