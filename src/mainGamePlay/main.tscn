@@ -286,7 +286,6 @@ __meta__ = {
 }
 
 [node name="started_instruction" type="TextureRect" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -306,8 +305,8 @@ visible = false
 [node name="menu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 55680.0
-margin_bottom = 31320.0
+margin_right = 67200.0
+margin_bottom = 37800.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -322,16 +321,14 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -80.0
 autoplay = true
 
 [node name="changeColumnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
-volume_db = -80.0
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -80.0
+volume_db = -17.333
 autoplay = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -358,7 +355,6 @@ anims/menu_hide = SubResource( 8 )
 
 [node name="gameplayMachineTime" type="Timer" parent="."]
 wait_time = 12.0
-autostart = true
 
 [connection signal="animation_finished" from="changeMongoose" to="." method="_on_changeMongoose_animation_finished"]
 [connection signal="timeout" from="gameplayMachineTime" to="plantControl" method="_on_gameplayMachineTime_timeout"]

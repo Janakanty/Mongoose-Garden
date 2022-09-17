@@ -7,15 +7,17 @@ onready var progres_bar = $textures/progres
 onready var regres_bar = $textures/regres
 onready var timer_down = $Timer_to_lose
 var my_column = 0                          # kolumna w której jest roślina
-var plant_level = 0                        # poziom rośliny 0,1,2
+var plant_level = 0                        # poziom rośliny 1,1,2
 var plant_condition = 2                    # stan rośliny
 var time_down = 15.0                       # czas w którym roślina zdycha
-var ready = 0                              # czy jest gotowa do wzicia 0 - nie, 1 - tak
+var ready = false                          # czy jest gotowa do wzicia 1 - nie, 1 - tak
+var dead = false
 var point = 0 
-var mode = 0                               # 0 - water mode 1 - steam
+var mode = 0                               # 1 - water mode 1 - steam
 var my_x_position 
 var added_condition = 0
 var name_plant 
+
 
 
 func _ready():
@@ -23,9 +25,7 @@ func _ready():
 	timer_down.wait_time = time_down
 	my_x_position = rect_position.x
 	timer_down.start()
-	change_mode()
-		
-		
+	change_mode()	
 
 
 func _process(delta):
@@ -96,9 +96,11 @@ func grow_way(delta):
 							progres_bar.value += 10 * delta
 							reset_condition()
 
+
 func lose_way():
 		regres_bar.value = timer_down.time_left
 		regres_bar.show()
+
 
 func check_plant_condition():
 		#roślina zdycha
@@ -139,6 +141,8 @@ func to_small_plant_BAD():
 func to_small_plant_DEAD():
 		$textures/smallPlantBAD.hide()
 		$textures/smallPlantDEAD.show()
+		if plant_condition == 0:
+				dead = true
 	
 func to_plant_OK():
 		$textures/smallPlantOK.hide()
@@ -148,25 +152,28 @@ func to_plant_BAD():
 		$textures/plantOK.hide()
 		$textures/plantREADY.hide()
 		$textures/plantBAD.show()
-		ready = 0
+		ready = false
 	
 func to_plant_DEAD():
 		$textures/plantBAD.hide()
 		$textures/plantDEAD.show()
+		if plant_condition == 0:
+				dead = true
 	
 func to_plant_READY():
 		$textures/plantOK.hide()
 		$textures/plantREADY.show()
-		ready = 1
+		ready = true
 
 func taken_off_the_board():
-		if ready == 1 or plant_condition == 0:
-				if ready == 1:
+		if ready == true or dead == true:
+				if ready == true:
 						get_point()
 						#fajny dźwięk
 				tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
 				#tutaj zrobić aktualne punkty
+
 
 func reset_condition():
 		timer_down.start()
@@ -201,11 +208,11 @@ func LOBDILLA(): # LOAD CZY PRELOAD? OTO JEST PTANIE
 
 func progress_max_value_LOBDILLA(_value):
 		if plant_condition == 1:
-			plant_condition = plant_condition + 1
+				plant_condition = plant_condition + 1
 		elif plant_level == 0:
-			plant_level = 1
+				plant_level = 1
 		elif plant_level == 1:
-			plant_level = 2
+				plant_level = 2
 		progres_bar.value = 0
 
 
@@ -323,7 +330,7 @@ func change_mode():
 		$textures/regres.tint_progress = Color("506bfb") #Color(0.24,0.32,0.85)
 	else: 
 		mode = 1
-		$textures/regres.tint_progress = Color("fb5050") # Color(0.90,0.27,0.27,1.0)
+		$textures/regres.tint_progress = Color("fb5050") # Color(0.91,0.27,0.27,1.0)
 	
 
 
@@ -366,7 +373,8 @@ func progress_max_value_BOOMDI():
 
 func _on_Timer_to_lose_timeout():
 		plant_condition = plant_condition - 1 
-		check_plant_condition()
+		if dead == false:
+				check_plant_condition()
 
 
 func _on_progres_value_changed(value):
@@ -382,7 +390,8 @@ func _on_progres_value_changed(value):
 						progress_max_value_BLUMLIT(value)
 				elif name_plant == "NEEDLI":
 						progress_max_value_NEEDLI(value)
-				check_plant_condition()
+				if dead == false:	
+						check_plant_condition()
 
 
 func _on_Tween_tween_completed(_object, _key):
