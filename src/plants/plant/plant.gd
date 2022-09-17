@@ -185,6 +185,10 @@ func get_point():
 
 
 # INDIVIDUAL PLANTS 
+# Kod rośliny składa się z:
+# -  ustawienia początkowych wartości tj. ustawienie tekstur, nazwy, ile punktów da do puli jeśli gracz ją zrealizuje, czas regresu i czas postępu. 
+# -  rozwoju rośliny 
+# -  właściwości specjalnych
 
 
 func LOBDILLA(): # LOAD CZY PRELOAD? OTO JEST PTANIE
