@@ -59,11 +59,6 @@ func get_new_plant(var i):             #
 
 
 func _on_gameplayMachineTime_timeout():
-		get_new_plant(1)
-		get_new_plant(2)
-		get_new_plant(3)
-		get_new_plant(4)
-		get_new_plant(5)
 		rng = RandomNumberGenerator.new()
 		rng.randomize()
 		var my_random_number = rng.randi_range(1, 5)

@@ -19,22 +19,27 @@ var added_condition = 0
 var name_plant 
 
 
-
 func _ready():
-	#testy
-	timer_down.wait_time = time_down
-	my_x_position = rect_position.x
-	timer_down.start()
-	change_mode()	
-
+		timer_down.wait_time = time_down
+		my_x_position = rect_position.x
+		timer_down.start()
+		change_mode()	
 
 func _process(delta):
 		lose_way()
 		grow_way(delta)
 
+func _on_Timer_to_lose_timeout():
+		plant_condition = plant_condition - 1 
+		if dead == false:
+				check_plant_condition()
 
-func grow_way(delta): 
-		#każda roślina ma swój specjalny grow way
+func _on_Tween_tween_completed(_object, _key):
+		get_parent().plant_slots[my_column-1] = 0
+		queue_free()
+
+
+func grow_way(delta): # mode mówi czy rośłina będzie potrzebować pary lub wody.
 		if mode == 0: 
 				match my_column:
 					1:
@@ -102,32 +107,59 @@ func lose_way():
 		regres_bar.show()
 
 
+func taken_off_the_board():
+		if ready == true or dead == true:
+				if ready == true:
+						get_point()
+						#fajny dźwięk
+				tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+				tween.start()
+
+
+func reset_condition():
+		timer_down.start()
+
+
+func get_point():
+		Global.point += point
+		Global.refresh_point()
+
+
+func progres_and_regress_bars_hide():
+		progres_bar.hide()
+		regres_bar.hide()
+
 func check_plant_condition():
-		#roślina zdycha
-		if plant_condition <= 0 and plant_level == 0: #jeśli roślina jest sadzonką i zdecha
-				timer_down.stop()
-				to_small_plant_DEAD()
-		elif plant_condition <= 0 and plant_level == 1:
-				timer_down.stop()
-				to_plant_DEAD()
-		elif plant_condition <= 0 and plant_level == 2:
-				timer_down.stop()
-				to_plant_DEAD()
-		#roślina staje się zdechła
-		elif plant_condition == 1 and plant_level == 0:
-				to_small_plant_BAD()
-		elif plant_condition == 1 and plant_level == 1:
-				to_plant_BAD()
-		elif plant_condition == 1 and plant_level == 2:
-				to_plant_BAD()
-		#roślina staje się OK
-		elif plant_condition == 2 and plant_level == 0:
-				to_small_plant_OK()
-		elif plant_condition == 2 and plant_level == 1:
-				to_plant_OK()
-		#roślina staje się ready
-		elif plant_condition == 2 and plant_level == 2:
-				to_plant_READY()
+		match plant_condition:
+				0:  #roślina zdycha
+					match plant_level:
+							0:
+								timer_down.stop()
+								to_small_plant_DEAD()
+							1:
+								timer_down.stop()
+								to_plant_DEAD()
+							2:
+								timer_down.stop()
+								to_plant_DEAD()
+					dead = true
+					progres_and_regress_bars_hide()
+				1:  #roślina powoli zdycha
+					match plant_level:
+							0:
+								to_small_plant_BAD()
+							1:
+								to_plant_BAD()
+							2:
+								to_plant_BAD()
+				2:  #roślina staje się OK
+					match plant_level:
+							0:
+								to_small_plant_OK()
+							1:
+								to_plant_OK()
+							2:
+								to_plant_READY()
 
 
 func to_small_plant_OK():
@@ -141,13 +173,12 @@ func to_small_plant_BAD():
 func to_small_plant_DEAD():
 		$textures/smallPlantBAD.hide()
 		$textures/smallPlantDEAD.show()
-		if plant_condition == 0:
-				dead = true
-	
+
 func to_plant_OK():
+		$textures/plantBAD.hide()
 		$textures/smallPlantOK.hide()
 		$textures/plantOK.show()
-	
+
 func to_plant_BAD():
 		$textures/plantOK.hide()
 		$textures/plantREADY.hide()
@@ -157,35 +188,39 @@ func to_plant_BAD():
 func to_plant_DEAD():
 		$textures/plantBAD.hide()
 		$textures/plantDEAD.show()
-		if plant_condition == 0:
-				dead = true
+
 	
 func to_plant_READY():
 		$textures/plantOK.hide()
 		$textures/plantREADY.show()
 		ready = true
 
-func taken_off_the_board():
-		if ready == true or dead == true:
-				if ready == true:
-						get_point()
-						#fajny dźwięk
-				tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-				tween.start()
-				#tutaj zrobić aktualne punkty
 
 
-func reset_condition():
-		timer_down.start()
 
 
-func get_point():
-		Global.point += point
-		Global.refresh_point()
+func _on_progres_value_changed(value):
+		regres_bar.hide()
+		if progres_bar.max_value == value:
+				match name_plant:
+						"LOBDILLA":
+							progress_max_value_LOBDILLA(value)
+						"BLEEDI":
+							progress_max_value_BLEEDI(value)
+						"VIOLIK":
+							progress_max_value_VIOLIK(value)
+						"BLUMLIT":
+							progress_max_value_BLUMLIT(value)
+						"NEEDLI":
+							progress_max_value_NEEDLI(value)
+						"LOBDILLA":
+							progress_max_value_LOBDILLA(value)
+				if dead == false:	
+						check_plant_condition()
 
 
 # INDIVIDUAL PLANTS 
-# Kod rośliny składa się z:
+# 	 Kod rośliny składa się z:
 # -  ustawienia początkowych wartości tj. ustawienie tekstur, nazwy, ile punktów da do puli jeśli gracz ją zrealizuje, czas regresu i czas postępu. 
 # -  rozwoju rośliny 
 # -  właściwości specjalnych
@@ -375,29 +410,3 @@ func BOOMDI():
 func progress_max_value_BOOMDI():
 		pass
 
-func _on_Timer_to_lose_timeout():
-		plant_condition = plant_condition - 1 
-		if dead == false:
-				check_plant_condition()
-
-
-func _on_progres_value_changed(value):
-		regres_bar.hide()
-		if progres_bar.max_value == value:
-				if name_plant == "LOBDILLA":
-						progress_max_value_LOBDILLA(value)
-				elif name_plant == "BLEEDI":
-						progress_max_value_BLEEDI(value)
-				elif name_plant == "VIOLIK":
-						progress_max_value_VIOLIK(value)
-				elif name_plant == "BLUMLIT":
-						progress_max_value_BLUMLIT(value)
-				elif name_plant == "NEEDLI":
-						progress_max_value_NEEDLI(value)
-				if dead == false:	
-						check_plant_condition()
-
-
-func _on_Tween_tween_completed(_object, _key):
-		get_parent().plant_slots[my_column-1] = 0
-		queue_free()
