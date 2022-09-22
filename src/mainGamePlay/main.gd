@@ -21,6 +21,7 @@ func _ready():
 func _unhandled_input(_event):
 		change_mongoose_position()
 		change_mongoose_to_active()
+		pause_game_p()
 		quit()
 
 
@@ -30,13 +31,13 @@ func _input(_event):
 # FUNKCJE STERUJĄCE
 
 func change_mongoose_position(): #zmiana pozycji mangust
-		if Input.is_action_just_pressed("left") and column > 1 and Global.start_gameplay == true and Global.notes_showed == false:
+		if Input.is_action_just_pressed("left") and column > 1 and Global.start_gameplay == true and Global.notes_showed == false and Global.pause == false:
 				$changeColumnSound.play()
 				get_node("mongooses/fire").powerOFF_plant()
 				get_node("mongooses/water").powerOFF_plant()
 				column = column - 1
 				check_mognoose_position()
-		elif Input.is_action_just_pressed("right") and column < 7 and Global.start_gameplay == true and Global.notes_showed == false:
+		elif Input.is_action_just_pressed("right") and column < 7 and Global.start_gameplay == true and Global.notes_showed == false and Global.pause == false:
 				$changeColumnSound.play()
 				get_node("mongooses/fire").powerOFF_plant()
 				get_node("mongooses/water").powerOFF_plant()
@@ -45,7 +46,7 @@ func change_mongoose_position(): #zmiana pozycji mangust
 
 
 func change_mongoose_to_active(): 
-		if Input.is_action_just_pressed("up") and mongoose_is_changing == 0 and Global.start_gameplay == true and Global.mongoose_active == false:
+		if Input.is_action_just_pressed("up") and mongoose_is_changing == 0 and Global.start_gameplay == true and Global.mongoose_active == false and Global.notes_showed == false and Global.pause == false:
 				mongoose_is_changing = 1
 				match mongoose_mode:
 						1:
@@ -69,12 +70,24 @@ func space_menu_start_game():
 		if Input.is_action_just_pressed("space") and menu_hide == false:
 				$menu_anim.play("menu_hide")
 				menu_hide = true
-		elif Input.is_action_just_pressed("space") and menu_hide == true:
+		elif Input.is_action_just_pressed("space") and menu_hide == true and Global.start_gameplay == false:
 				$started_instruction.hide()	
 				Global.start_gameplay = true
 				$gameplayMachineTime.start()
 				start_game_all_plants()
-				
+
+
+func pause_game_p():
+		if Input.is_action_just_pressed("p"):
+			if Global.pause == false:
+				for i in get_node("plantControl").get_children():
+						i.pause_game()
+				get_node("gameplayMachineTime").paused = true
+			else:
+				for i in get_node("plantControl").get_children():
+						i.loose_game()
+				get_node("gameplayMachineTime").paused = false	
+
 
 
 func quit():
@@ -109,3 +122,4 @@ func start_game_all_plants():
 		$plantControl.get_new_plant(3)
 		$plantControl.get_new_plant(4)
 		$plantControl.get_new_plant(5)
+

@@ -103,8 +103,9 @@ func grow_way(delta): # mode mówi czy rośłina będzie potrzebować pary lub w
 
 
 func lose_way():
-		regres_bar.value = timer_down.time_left
-		regres_bar.show()
+		if dead == false:
+				regres_bar.value = timer_down.time_left
+				regres_bar.show()
 
 
 func taken_off_the_board():
@@ -128,6 +129,16 @@ func get_point():
 func progres_and_regress_bars_hide():
 		progres_bar.hide()
 		regres_bar.hide()
+
+
+func pause_game():
+		get_node("Timer_to_lose").paused = true
+		Global.pause = true
+
+func loose_game():
+		get_node("Timer_to_lose").paused = false
+		Global.pause = false
+
 
 func check_plant_condition():
 		match plant_condition:
@@ -192,6 +203,7 @@ func to_plant_DEAD():
 
 
 func to_plant_READY():
+		$textures/plantBAD.hide()
 		$textures/plantOK.hide()
 		$textures/plantREADY.show()
 		ready = true

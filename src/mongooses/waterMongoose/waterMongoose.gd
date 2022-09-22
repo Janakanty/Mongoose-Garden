@@ -7,7 +7,7 @@ func _input(_event):
 		power_if_active()
 
 func power_if_active():
-		if active == true:
+		if active == true and Global.pause == false:
 				if Input.is_action_just_pressed("down"):
 						powerON()
 				elif Input.is_action_just_released("down"):

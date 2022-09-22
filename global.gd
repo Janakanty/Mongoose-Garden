@@ -5,6 +5,7 @@ var point = 0
 var life = 5
 var start_gameplay = false
 var notes_showed = false
+var pause = false
 
 # kolumna 1
 var watering_col1 = 0
