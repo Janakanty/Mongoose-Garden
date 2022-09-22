@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Control.gd" type="Script" id=1]
+[ext_resource path="res://src/diary/Control.gd" type="Script" id=1]
 [ext_resource path="res://graphics/interface/DZIENNIK2.png" type="Texture" id=2]
 [ext_resource path="res://graphics/interface/DZIENNIK1.png" type="Texture" id=3]
 

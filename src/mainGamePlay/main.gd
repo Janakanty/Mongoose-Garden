@@ -29,15 +29,14 @@ func _input(_event):
 
 # FUNKCJE STERUJĄCE
 
-
 func change_mongoose_position(): #zmiana pozycji mangust
-		if Input.is_action_just_pressed("left") and column > 1 and Global.start_gameplay == true:
+		if Input.is_action_just_pressed("left") and column > 1 and Global.start_gameplay == true and Global.notes_showed == false:
 				$changeColumnSound.play()
 				get_node("mongooses/fire").powerOFF_plant()
 				get_node("mongooses/water").powerOFF_plant()
 				column = column - 1
 				check_mognoose_position()
-		elif Input.is_action_just_pressed("right") and column < 7 and Global.start_gameplay == true:
+		elif Input.is_action_just_pressed("right") and column < 7 and Global.start_gameplay == true and Global.notes_showed == false:
 				$changeColumnSound.play()
 				get_node("mongooses/fire").powerOFF_plant()
 				get_node("mongooses/water").powerOFF_plant()

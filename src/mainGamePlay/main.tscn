@@ -11,7 +11,7 @@
 [ext_resource path="res://graphics/pointsFont.tres" type="DynamicFont" id=9]
 [ext_resource path="res://graphics/menu/MAIN.png" type="Texture" id=10]
 [ext_resource path="res://graphics/interface/sterowanie.png" type="Texture" id=11]
-[ext_resource path="res://src/notes.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/diary/notes.tscn" type="PackedScene" id=12]
 [ext_resource path="res://SOUNDS/ruch w bok.wav" type="AudioStream" id=13]
 [ext_resource path="res://SOUNDS/mangusci spiew.wav" type="AudioStream" id=14]
 
@@ -150,7 +150,7 @@ tracks/1/keys = {
 "values": [ Vector2( -116, -351 ), Vector2( -116, -59 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera:zoom")
@@ -165,8 +165,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0.5, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "slowMove"
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera:zoom")
 tracks/0/interp = 1
@@ -314,6 +313,9 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.000152588
+margin_top = 0.315365
+margin_bottom = 0.316406
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -332,7 +334,7 @@ volume_db = -17.333
 autoplay = true
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 959, 538 )
+position = Vector2( 959.707, 539.768 )
 scale = Vector2( 0.137986, 0.369949 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
@@ -344,8 +346,8 @@ anims/change_to_garden = SubResource( 3 )
 anims/change_to_water = SubResource( 4 )
 
 [node name="camera" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 6 )
-anims/slowMove = SubResource( 5 )
+anims/RESET = SubResource( 5 )
+anims/slowMove = SubResource( 6 )
 
 [node name="menu_anim" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 7 )
@@ -355,6 +357,5 @@ anims/menu_hide = SubResource( 8 )
 
 [node name="gameplayMachineTime" type="Timer" parent="."]
 wait_time = 12.0
-
 [connection signal="animation_finished" from="changeMongoose" to="." method="_on_changeMongoose_animation_finished"]
 [connection signal="timeout" from="gameplayMachineTime" to="plantControl" method="_on_gameplayMachineTime_timeout"]

@@ -184,12 +184,13 @@ func to_plant_BAD():
 		$textures/plantREADY.hide()
 		$textures/plantBAD.show()
 		ready = false
-	
+
+
 func to_plant_DEAD():
 		$textures/plantBAD.hide()
 		$textures/plantDEAD.show()
 
-	
+
 func to_plant_READY():
 		$textures/plantOK.hide()
 		$textures/plantREADY.show()
