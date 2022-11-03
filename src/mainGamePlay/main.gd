@@ -6,6 +6,8 @@ onready var garden_mongoose = $mongooses/garden
 onready var mongooses = $mongooses
 onready var tween = get_node("Tween")
 
+
+var max_hp = 3               # maksymalna ilosc życia
 var column = 1               # kolumna na której aktualnie jest mangusta
 var mongoose_mode = 1        # 1 - water , 2 - fire , 3 - garderer
 var mongoose_is_changing = 0 # zmienna nie pozwalająca uruchomić kolejnej animacji jeżeli aktualna się jeszcze nie skoczyła.  
@@ -25,8 +27,20 @@ func _unhandled_input(_event):
 		quit()
 
 
+func test_HP():
+		if Input.is_action_just_pressed("q"):
+				get_node("background/HP_System").increase_MAX_HP()
+		if Input.is_action_just_pressed("w"):
+				get_node("background/HP_System").decrease_MAX_HP()
+		if Input.is_action_just_pressed("e"):
+				get_node("background/HP_System").increase_HP()
+		if Input.is_action_just_pressed("r"):
+				get_node("background/HP_System").decrease_HP()
+	
+
 func _input(_event):
 		space_menu_start_game()
+		test_HP()
 
 # FUNKCJE STERUJĄCE
 
@@ -78,17 +92,28 @@ func space_menu_start_game():
 
 
 func pause_game_p():
-		if Input.is_action_just_pressed("p"):
-			if Global.pause == false:
+		if Input.is_action_just_pressed("p") :
+				Global.pause_by_p = true
+				pause_game()
+
+
+func pause_game():
+		if Global.pause == false:
 				for i in get_node("plantControl").get_children():
 						i.pause_game()
+				for i in get_node("mongooses").get_children():
+						i.pause_mongoose()
 				get_node("gameplayMachineTime").paused = true
-			else:
+				Global.pause = true
+		elif Global.pause == true and Global.notes_showed == false:
 				for i in get_node("plantControl").get_children():
 						i.loose_game()
+				for i in get_node("mongooses").get_children():
+						i.loose_mongoose()
 				get_node("gameplayMachineTime").paused = false	
-
-
+				Global.pause = false
+				Global.pause_by_p = false
+		Global.mongoose_active = false
 
 func quit():
 		if Input.is_action_pressed("quit"):
@@ -111,7 +136,6 @@ func end_game():
 				pass
 				#false
 
-
 func _on_changeMongoose_animation_finished(_anim_name):
 		mongoose_is_changing = 0
 
@@ -121,5 +145,5 @@ func start_game_all_plants():
 		$plantControl.get_new_plant(2)
 		$plantControl.get_new_plant(3)
 		$plantControl.get_new_plant(4)
-		$plantControl.get_new_plant(5)
+		$plantControl.get_new_plant(6)
 

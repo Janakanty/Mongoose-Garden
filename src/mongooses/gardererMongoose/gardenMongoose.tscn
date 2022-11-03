@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -117, -2 ) ]
+"values": [ Vector2( -117, -686 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -42,9 +42,9 @@ extents = Vector2( 114, 33 )
 
 [node name="mongoose" type="Control"]
 margin_left = -117.0
-margin_top = -2.0
+margin_top = -686.0
 margin_right = 117.0
-margin_bottom = 997.0
+margin_bottom = 313.0
 rect_pivot_offset = Vector2( 117, 0 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -60,31 +60,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pows" type="TextureRect" parent="."]
-visible = false
-anchor_top = 0.033
-anchor_right = 1.0
-anchor_bottom = 0.934
-margin_left = 32.0
-margin_top = 596.033
-margin_right = -30.0
-margin_bottom = -134.066
+[node name="pows" type="Sprite" parent="."]
+position = Vector2( 118, 704 )
 texture = ExtResource( 3 )
 flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="power" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/powerON = SubResource( 2 )
-
-[node name="Light2D" type="Light2D" parent="."]
-light_mask = 3
-position = Vector2( 119, 714 )
-scale = Vector2( 1.01547, -1.04272 )
-texture = ExtResource( 3 )
-mode = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 

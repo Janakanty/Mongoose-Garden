@@ -1,12 +1,17 @@
 extends Node
 
-var mongoose_active = false
-var point = 0
-var life = 5
-var start_gameplay = false
-var notes_showed = false
-var pause = false
+var mongoose_active : bool = false
+var start_gameplay : bool = false
+var notes_showed : bool = false
+var pause : bool = false
+var pause_by_p : bool = false
 
+var point = 0
+var MAX_HP = 3
+var HP = 3
+var game_over = false
+
+# ZMIENNE ZPRAWDZAJĄ CZY KTOŚ JE AKTUALNIE PODLEWA LUB NAWILŻA
 # kolumna 1
 var watering_col1 = 0
 var evaporating_col1 = 0

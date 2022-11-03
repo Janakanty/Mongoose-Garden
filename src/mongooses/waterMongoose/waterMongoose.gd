@@ -28,6 +28,16 @@ func powerOFF():
 		Global.mongoose_active = false
 		powerOFF_plant()
 
+func pause_mongoose():
+		$power.stop()
+		$AudioStreamPlayer.stop()
+		$ColorRect/Particles2D.emitting = false
+		Global.mongoose_active = false
+		powerOFF_plant()
+
+
+func loose_mongoose():
+		pass
 
 func powerOFF_plant():
 		Global.watering_col1 = 0

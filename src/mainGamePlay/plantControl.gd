@@ -26,8 +26,7 @@ func rand_next_plant(var i):
 				3: next_plant.VIOLIK()
 				4: next_plant.NEEDLI()
 				5: next_plant.BLUMLIT()
-				#6:plant = preload("res://src/plants/bleblo/bleblo.tscn")
-				
+				6: next_plant.BLEBLO()
 
 
 		var rng = rand_free_plant_slots()
@@ -61,6 +60,6 @@ func get_new_plant(var i):             #
 func _on_gameplayMachineTime_timeout():
 		rng = RandomNumberGenerator.new()
 		rng.randomize()
-		var my_random_number = rng.randi_range(1, 5)
+		var my_random_number = rng.randi_range(1, 6)
 		get_new_plant(my_random_number)
 	

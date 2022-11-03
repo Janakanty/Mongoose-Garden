@@ -1,9 +1,9 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/mainGamePlay/main.gd" type="Script" id=1]
 [ext_resource path="res://src/mongooses/waterMongoose/waterMongoose.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/mainGamePlay/plantControl.gd" type="Script" id=3]
-[ext_resource path="res://graphics/background/background UPDATE2.png" type="Texture" id=4]
+[ext_resource path="res://graphics/background/background.png" type="Texture" id=4]
 [ext_resource path="res://src/mongooses/gardererMongoose/gardenMongoose.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/mongooses/fireMongoose/fireMongoose.tscn" type="PackedScene" id=6]
 [ext_resource path="res://SOUNDS/untitled.wav" type="AudioStream" id=7]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/diary/notes.tscn" type="PackedScene" id=12]
 [ext_resource path="res://SOUNDS/ruch w bok.wav" type="AudioStream" id=13]
 [ext_resource path="res://SOUNDS/mangusci spiew.wav" type="AudioStream" id=14]
+[ext_resource path="res://src/mainGamePlay/HP.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -218,6 +219,10 @@ __meta__ = {
 }
 
 [node name="background" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1920.0
+margin_bottom = -1080.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -255,6 +260,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HP_System" parent="background" instance=ExtResource( 15 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 1919.0
+margin_bottom = 1075.0
+
 [node name="mongooses" type="Control" parent="."]
 margin_left = 231.0
 margin_right = 231.0
@@ -285,14 +298,15 @@ __meta__ = {
 }
 
 [node name="started_instruction" type="TextureRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -526.0
-margin_top = -419.0
-margin_right = 517.0
-margin_bottom = 452.0
+margin_top = -479.0
+margin_right = 535.0
+margin_bottom = 502.0
 texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -302,10 +316,11 @@ __meta__ = {
 visible = false
 
 [node name="menu" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 74880.0
-margin_bottom = 42120.0
+margin_right = 120960.0
+margin_bottom = 68040.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

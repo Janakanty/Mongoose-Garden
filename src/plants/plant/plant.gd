@@ -17,6 +17,7 @@ var mode = 0                               # 1 - water mode 1 - steam
 var my_x_position 
 var added_condition = 0
 var name_plant 
+var speed_progress = 10
 
 
 func _ready():
@@ -133,11 +134,9 @@ func progres_and_regress_bars_hide():
 
 func pause_game():
 		get_node("Timer_to_lose").paused = true
-		Global.pause = true
 
 func loose_game():
 		get_node("Timer_to_lose").paused = false
-		Global.pause = false
 
 
 func check_plant_condition():
@@ -210,8 +209,6 @@ func to_plant_READY():
 
 
 
-
-
 func _on_progres_value_changed(value):
 		regres_bar.hide()
 		if progres_bar.max_value == value:
@@ -239,7 +236,7 @@ func _on_progres_value_changed(value):
 # -  właściwości specjalnych
 
 
-func LOBDILLA(): # LOAD CZY PRELOAD? OTO JEST PTANIE
+func LOBDILLA(): #dość szybki kwiatek. Mało punktowany ale bardzo szybki do realizacji
 		name_plant = "LOBDILLA"
 		point = 1
 		time_down = 5
@@ -268,7 +265,7 @@ func progress_max_value_LOBDILLA(_value):
 		progres_bar.value = 0
 
 
-func BLEEDI():
+func BLEEDI(): #normalny kwiatek, potencjalnie normalna długoścc podlewania 
 		name_plant = "BLEEDI"
 		point = 1
 		time_down = 10
@@ -289,7 +286,7 @@ func BLEEDI():
 		$textures/plantDEAD.texture = load("res://graphics/plants/bleedi/BLEEDI DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/bleedi/BLEEDI OK.png")
 
-func progress_max_value_BLEEDI(_value):
+func progress_max_value_BLEEDI(_value): 
 		if plant_condition == 1:
 			plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -301,7 +298,7 @@ func progress_max_value_BLEEDI(_value):
 		progres_bar.value = 0
 
 
-func VIOLIK():
+func VIOLIK():  #ten kwaitek co się tylko podlewa parą 
 		name_plant = "VIOLIK"
 		point = 1
 		time_down = 20
@@ -335,7 +332,7 @@ func progress_max_value_VIOLIK(_value):
 		progres_bar.value = 0
 
 
-func NEEDLI():
+func NEEDLI(): 
 		name_plant = "NEEDLI"
 		point = 1
 		time_down = 25
@@ -355,7 +352,7 @@ func NEEDLI():
 		$textures/plantDEAD.texture = load("res://graphics/plants/needli/NEEDLI DEAD.png")
 		$textures/plantREADY.texture = load("res://graphics/plants/needli/NEEDLI OK.png")
 
-func progress_max_value_NEEDLI(_value):
+func progress_max_value_NEEDLI(_value): #ten kaktus co najdłużej można go zostawić
 		if plant_condition == 1:
 				plant_condition = plant_condition + 1
 		elif plant_level == 0:
@@ -386,7 +383,7 @@ func change_mode():
 	
 
 
-func BLUMLIT():
+func BLUMLIT(): # ten niebieski co daje życie
 		name_plant = "BLUMLIT"
 		point = 1
 		time_down = 15
@@ -415,6 +412,18 @@ func progress_max_value_BLUMLIT(_value):
 				plant_level = 2
 		progres_bar.value = 0
 
+
+func BLEBLO(): #krzak co utrudnia życie
+	name_plant = "BLUMLIT"
+	point = 1
+	ready = true
+	dead = true
+	$textures.rect_position.y +=152
+	$textures/progres.hide()
+	$textures/regres.hide()
+	$textures/smallPlantOK.hide()
+	$textures/flowerPot.texture = load("res://graphics/plants/bleblo/bleblo.png")
+	
 
 func BOOMDI():
 	pass

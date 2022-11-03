@@ -2,6 +2,11 @@ extends Control
 
 var active: bool = false
 
+func _ready():
+		$pows.z_index = 1
+
+
+
 func _input(_event):
 		power_if_active()
 
@@ -23,6 +28,18 @@ func powerON():
 func powerOFF():
 		$power.play_backwards("powerON")
 		Global.mongoose_active = false
+
+
+func pause_mongoose():
+		if active == true:
+				Global.mongoose_active = false
+				$power.stop()
+
+
+func loose_mongoose():
+		if active == true:
+				Global.mongoose_active = true
+				$power.play("RESET")
 
 
 func _on_Area2D_area_entered(area):

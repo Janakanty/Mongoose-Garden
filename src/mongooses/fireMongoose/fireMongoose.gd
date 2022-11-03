@@ -34,6 +34,23 @@ func powerOFF():
 		Global.mongoose_active = false
 		powerOFF_plant()
 
+func pause_mongoose():
+		$power.stop()
+		$power2.stop()
+		$AudioStreamPlayer.stop()
+		Global.mongoose_active = false
+		powerOFF_plant()
+
+
+func loose_mongoose():
+		if active ==true:
+				get_parent().get_node("water").get_node("power").stop()
+				get_parent().get_node("water").get_node("ColorRect").get_node("Particles2D").emitting = false
+				$power.play_backwards("powerON")
+				$power2.play()
+				$AudioStreamPlayer.stop()
+				Global.mongoose_active = false
+				powerOFF_plant()
 
 func powerOFF_plant():
 		Global.evaporating_col1 = 0
