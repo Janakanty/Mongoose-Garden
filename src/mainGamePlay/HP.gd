@@ -27,7 +27,6 @@ func _ready():
 		increase_HP()
 
 
-
 func stat_HP():
 		if Global.MAX_HP < 10:
 				for n in Global.MAX_HP:
@@ -36,9 +35,9 @@ func stat_HP():
 
 # MAX HP FUNCTIONS
 
-func increase_MAX_HP(): #chyba działa
+func increase_MAX_HP():
 		var pom = 0
-		if Global.MAX_HP < 9 : #Global.MAX_HP zostało podwyższone
+		if Global.MAX_HP < 9 : 
 				Global.MAX_HP += 1
 				Global.HP += 1
 				for n in Global.MAX_HP:
@@ -47,8 +46,8 @@ func increase_MAX_HP(): #chyba działa
 				HP_array[Global.MAX_HP - 1].get_node("HP").visible = true
 
 
-func decrease_MAX_HP():#CHYBA DZIAŁA
-		if Global.MAX_HP > 0 : #Global.MAX_HP zostało obniżone
+func decrease_MAX_HP():
+		if Global.MAX_HP > 0 : 
 				Global.MAX_HP -= 1
 				Global.HP -= 1
 				HP_array[Global.MAX_HP].visible = false
@@ -61,14 +60,14 @@ func decrease_MAX_HP():#CHYBA DZIAŁA
 
 func increase_HP():
 		var pom = Global.MAX_HP - Global.HP
-		if Global.HP < Global.MAX_HP : #Global.MAX_HP zostało podwyższone
+		if Global.HP < Global.MAX_HP : 
 				Global.HP += 1
 				for n  in Global.HP:
 					HP_array[Global.MAX_HP - 1 - n].get_node("HP").visible = true
 
 
 func decrease_HP():
-		if Global.HP > 0 : #Global.MAX_HP zostało obniżone
+		if Global.HP > 0 : 
 				Global.HP -= 1
 				for n in (Global.MAX_HP - Global.HP):
 						HP_array[n].get_node("HP").visible = false
