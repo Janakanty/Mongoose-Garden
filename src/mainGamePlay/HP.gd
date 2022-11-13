@@ -1,30 +1,24 @@
 extends Control
 
-onready var one_hp =   get_node("HBoxContainer/HP1")
-onready var two_hp =   get_node("HBoxContainer/HP2")
-onready var three_hp = get_node("HBoxContainer/HP3")
-onready var four_hp =  get_node("HBoxContainer/HP4")
-onready var five_hp =  get_node("HBoxContainer/HP5")
-onready var six_hp =   get_node("HBoxContainer/HP6")
-onready var seven_hp = get_node("HBoxContainer/HP7")
-onready var eight_hp = get_node("HBoxContainer/HP8")
-onready var nine_hp =  get_node("HBoxContainer/HP9")
+#onready var one_hp =   get_node("HBoxContainer/HP1")
+#onready var two_hp =   get_node("HBoxContainer/HP2")
+#onready var three_hp = get_node("HBoxContainer/HP3")
+#onready var four_hp =  get_node("HBoxContainer/HP4")
+#onready var five_hp =  get_node("HBoxContainer/HP5")
+#onready var six_hp =   get_node("HBoxContainer/HP6")
+#onready var seven_hp = get_node("HBoxContainer/HP7")
+#onready var eight_hp = get_node("HBoxContainer/HP8")
+#onready var nine_hp =  get_node("HBoxContainer/HP9")
 
 var HP_array = Array()
 
 func init_array():
-		HP_array = [one_hp, two_hp, three_hp, four_hp, five_hp, six_hp, seven_hp, eight_hp, nine_hp]
-
+		#HP_array = [one_hp, two_hp, three_hp, four_hp, five_hp, six_hp, seven_hp, eight_hp, nine_hp]
+		HP_array = $HBoxContainer.get_children()
 
 func _ready():
 		init_array()
-		stat_HP()
-		decrease_HP()
-		decrease_HP()
-		decrease_HP()
-		increase_HP()
-		increase_HP()
-		increase_HP()
+		stat_HP()  
 
 
 func stat_HP():

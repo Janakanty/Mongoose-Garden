@@ -319,8 +319,8 @@ visible = false
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 120960.0
-margin_bottom = 68040.0
+margin_right = 126720.0
+margin_bottom = 71280.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

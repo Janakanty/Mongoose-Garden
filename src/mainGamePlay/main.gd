@@ -36,7 +36,7 @@ func test_HP():
 				get_node("background/HP_System").increase_HP()
 		if Input.is_action_just_pressed("r"):
 				get_node("background/HP_System").decrease_HP()
-	
+
 
 func _input(_event):
 		space_menu_start_game()

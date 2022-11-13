@@ -18,6 +18,7 @@ var my_x_position
 var added_condition = 0
 var name_plant 
 var speed_progress = 10
+var final_progress_speed
 
 
 func _ready():
@@ -39,105 +40,117 @@ func _on_Tween_tween_completed(_object, _key):
 		get_parent().plant_slots[my_column-1] = 0
 		queue_free()
 
+#USUNICIE ROŚLINY Z PLANSZY
+func taken_off_the_board():
+		if ready == true or dead == true:
+				if ready == true:
+						get_point()
+						effect_plant()
+						#fajny dźwięk
+				if dead == true and name_plant != "BLEBLO":
+						lose_one_HP()
+				tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+				tween.start()
 
-func grow_way(delta): # mode mówi czy rośłina będzie potrzebować pary lub wody.
+func get_point():
+		Global.point += point
+		Global.refresh_point()
+
+func reset_condition():
+		timer_down.start()
+
+func effect_plant():
+		match name_plant:
+				"LOBDILLA":
+						pass
+				"BLEEDI":
+						pass
+				"VIOLIK":
+						pass
+				"NEEDLI":
+						pass
+				"BLUMLIT":
+						effect_BLIMLIT()
+				"BLEBLO":
+						effect_BLEBLO()
+
+func grow_way(delta): # mode mówi czy roślina będzie potrzebować pary lub wody.
+		final_progress_speed = Global.progress_speed - Global.progress_speed_disadvantage
 		if mode == 0: 
 				match my_column:
 					1:
 						if Global.watering_col1 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					2:
 						if Global.watering_col2 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					3:
 						if Global.watering_col3 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					4:
 						if Global.watering_col4 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					5:
 						if Global.watering_col5 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					6:
 						if Global.watering_col6 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					7:
 						if Global.watering_col7 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 		elif mode == 1:	
 				match my_column:
 					1:
 						if Global.evaporating_col1 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					2:
 						if Global.evaporating_col2 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					3:
 						if Global.evaporating_col3 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					4:
 						if Global.evaporating_col4 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					5:
 						if Global.evaporating_col5 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					6:
 						if Global.evaporating_col6 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
 					7:
 						if Global.evaporating_col7 == 1:
-							progres_bar.value += 10 * delta
+							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-
 
 func lose_way():
 		if dead == false:
 				regres_bar.value = timer_down.time_left
 				regres_bar.show()
 
-
-func taken_off_the_board():
-		if ready == true or dead == true:
-				if ready == true:
-						get_point()
-						#fajny dźwięk
-				tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-				tween.start()
-
-
-func reset_condition():
-		timer_down.start()
-
-
-func get_point():
-		Global.point += point
-		Global.refresh_point()
-
-
 func progres_and_regress_bars_hide():
 		progres_bar.hide()
 		regres_bar.hide()
-
 
 func pause_game():
 		get_node("Timer_to_lose").paused = true
 
 func loose_game():
 		get_node("Timer_to_lose").paused = false
-
 
 func check_plant_condition():
 		match plant_condition:
@@ -171,7 +184,6 @@ func check_plant_condition():
 							2:
 								to_plant_READY()
 
-
 func to_small_plant_OK():
 		$textures/smallPlantBAD.hide()
 		$textures/smallPlantOK.show()
@@ -195,19 +207,15 @@ func to_plant_BAD():
 		$textures/plantBAD.show()
 		ready = false
 
-
 func to_plant_DEAD():
 		$textures/plantBAD.hide()
 		$textures/plantDEAD.show()
-
 
 func to_plant_READY():
 		$textures/plantBAD.hide()
 		$textures/plantOK.hide()
 		$textures/plantREADY.show()
 		ready = true
-
-
 
 func _on_progres_value_changed(value):
 		regres_bar.hide()
@@ -228,22 +236,21 @@ func _on_progres_value_changed(value):
 				if dead == false:	
 						check_plant_condition()
 
-
 # INDIVIDUAL PLANTS 
 # 	 Kod rośliny składa się z:
 # -  ustawienia początkowych wartości tj. ustawienie tekstur, nazwy, ile punktów da do puli jeśli gracz ją zrealizuje, czas regresu i czas postępu. 
 # -  rozwoju rośliny 
 # -  właściwości specjalnych
 
-
+#LOBDILLA
 func LOBDILLA(): #dość szybki kwiatek. Mało punktowany ale bardzo szybki do realizacji
 		name_plant = "LOBDILLA"
 		point = 1
-		time_down = 5
+		time_down = Global.value_regress_LOBDILLA
 		rect_position.y = rect_position.y - 50
-		$textures/progres.max_value = 30
-		$textures/regres.max_value = 5
-		$textures/regres.value = 5
+		$textures/progres.max_value = Global.max_progress_LOBDILLA
+		$textures/regres.max_value = Global.value_regress_LOBDILLA
+		#$textures/regres.value = Global.value_regress_LOBDILLA
 		$textures/progres.rect_position.y += 20
 		$textures/regres.rect_position.y += 20
 		$textures/flowerPot.texture = load("res://graphics/plants/lobdilla/lobdilla doniczka.png")
@@ -264,15 +271,15 @@ func progress_max_value_LOBDILLA(_value):
 				plant_level = 2
 		progres_bar.value = 0
 
-
+#BLEEDI
 func BLEEDI(): #normalny kwiatek, potencjalnie normalna długoścc podlewania 
 		name_plant = "BLEEDI"
 		point = 1
-		time_down = 10
+		time_down = Global.value_regress_BLEEDI
 		rect_position.y = rect_position.y + 9
-		$textures/progres.max_value = 20
-		$textures/regres.max_value = 10
-		$textures/regres.value = 10
+		$textures/progres.max_value = Global.max_progress_BLEEDI
+		$textures/regres.max_value = Global.value_regress_BLEEDI
+		#$textures/regres.value = Global.value_regress_BLEEDI
 		$textures/progres.rect_position.y -= 20
 		$textures/regres.rect_position.y -= 20
 		$textures/progres.rect_position.x += 5
@@ -297,15 +304,15 @@ func progress_max_value_BLEEDI(_value):
 			plant_level = 2
 		progres_bar.value = 0
 
-
-func VIOLIK():  #ten kwaitek co się tylko podlewa parą 
+#VIOLIK
+func VIOLIK():  #ten kwiatek co się tylko podlewa parą 
 		name_plant = "VIOLIK"
 		point = 1
-		time_down = 20
+		time_down = Global.value_regress_VIOLIK
 		mode = 1
-		$textures/progres.max_value = 40
-		$textures/regres.max_value = 20
-		$textures/regres.value = 20
+		$textures/progres.max_value = Global.max_progress_VIOLIK
+		$textures/regres.max_value = Global.value_regress_VIOLIK
+		#$textures/regres.value = Global.value_regress_VIOLIK
 		$textures.rect_position.x -= 30
 		$textures/progres.rect_position.y -= 20
 		$textures/regres.rect_position.y -= 20
@@ -331,14 +338,14 @@ func progress_max_value_VIOLIK(_value):
 			plant_level = 2
 		progres_bar.value = 0
 
-
+#NEEDLI
 func NEEDLI(): 
 		name_plant = "NEEDLI"
 		point = 1
-		time_down = 25
+		time_down = Global.value_regress_NEEDLI
 		rect_position.y = rect_position.y - 34
-		$textures/progres.max_value = 30
-		$textures/regres.max_value = 25
+		$textures/progres.max_value = Global.max_progress_NEEDLI
+		$textures/regres.max_value = Global.value_regress_NEEDLI
 		$textures/progres.rect_position.y += 25
 		$textures/regres.rect_position.y += 25
 		$textures/progres.rect_position.x += 17
@@ -372,7 +379,6 @@ func progress_max_value_NEEDLI(_value): #ten kaktus co najdłużej można go zos
 		progres_bar.value = 0
 		change_mode()
 
-
 func change_mode():
 	if added_condition < 2 and name_plant != "VIOLIK": #water mode
 		mode = 0
@@ -380,16 +386,15 @@ func change_mode():
 	else: 
 		mode = 1
 		$textures/regres.tint_progress = Color("fb5050") # Color(0.91,0.27,0.27,1.0)
-	
 
-
+#BLUMLIT
 func BLUMLIT(): # ten niebieski co daje życie
 		name_plant = "BLUMLIT"
 		point = 1
-		time_down = 15
-		$textures/progres.max_value = 30
-		$textures/regres.max_value = 15
-		$textures/regres.value = 15
+		time_down = Global.value_regress_BLUMLIT
+		$textures/progres.max_value = Global.max_progress_BLUMLIT
+		$textures/regres.max_value = Global.value_regress_BLUMLIT
+		#$textures/regres.value = Global.value_regress_BLUMLIT
 		$textures/flowerPot.texture = load("res://graphics/plants/blumlit/blumlit doniczka.png")
 		$textures/smallPlantOK.texture = load("res://graphics/plants/blumlit/BLUMLIT sadzonka OK.png")
 		$textures/smallPlantBAD.texture = load("res://graphics/plants/blumlit/BLUMLIT sadzonka BAD.png")
@@ -412,23 +417,35 @@ func progress_max_value_BLUMLIT(_value):
 				plant_level = 2
 		progres_bar.value = 0
 
+func effect_BLIMLIT(): # wywouje funkcje increase_HP() ze skryptu HP.gd
+		get_one_HP()
+		
 
+#BLEBLO
 func BLEBLO(): #krzak co utrudnia życie
-	name_plant = "BLUMLIT"
+	name_plant = "BLEBLO"
 	point = 1
 	ready = true
 	dead = true
+	Global.progress_speed_disadvantage += 5
 	$textures.rect_position.y +=152
 	$textures/progres.hide()
 	$textures/regres.hide()
 	$textures/smallPlantOK.hide()
 	$textures/flowerPot.texture = load("res://graphics/plants/bleblo/bleblo.png")
-	
 
+func effect_BLEBLO(): # wywouje funkcje increase_HP() ze skryptu HP.gd
+		Global.progress_speed_disadvantage -= 5
+
+#BOOMDI
 func BOOMDI():
 	pass
-	
-	
+
 func progress_max_value_BOOMDI():
 		pass
 
+func get_one_HP():
+	get_parent().get_parent().get_node("background/HP_System").increase_HP()
+	
+func lose_one_HP():
+	get_parent().get_parent().get_node("background/HP_System").decrease_HP()
