@@ -128,13 +128,16 @@ func check_mognoose_position():
 
 #FUNKCJE 
 
-func end_game():
-		if Global.point >= 500:
-				pass
-				#win
-		if Global.life <= 0:
-				pass
-				#false
+func check_end_game():
+		if Global.plant_counter <= 0 or Global.HP <= 0:
+				if Global.point >= Global.expected_point_to_win:
+						pass #win
+				else:
+						pass #game over
+				
+
+func end_game_window():
+	pass
 
 func _on_changeMongoose_animation_finished(_anim_name):
 		mongoose_is_changing = 0

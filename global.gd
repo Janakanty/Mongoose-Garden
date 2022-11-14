@@ -6,8 +6,9 @@ var notes_showed : bool = false
 var pause : bool = false
 var pause_by_p : bool = false
 
-
+var plant_counter = 20
 var point = 0
+var expected_point_to_win = 500
 var MAX_HP = 3
 var HP = 3
 var game_over = false
@@ -38,8 +39,10 @@ var value_regress_BLUMLIT = 20
 
 # FUNKCJE 
 func refresh_point():
-	print(point)
 	get_parent().get_node("/root/main/background/point").text = str(point)
+	
+func refresh_counter():
+	get_parent().get_node("/root/main/background/counter").text = str(plant_counter)
 
 # ZMIENNE ZPRAWDZAJĄ CZY KTOŚ JE AKTUALNIE PODLEWA LUB NAWILŻA
 # kolumna 1

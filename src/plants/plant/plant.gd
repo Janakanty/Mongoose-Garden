@@ -46,6 +46,8 @@ func taken_off_the_board():
 				if ready == true:
 						get_point()
 						effect_plant()
+						Global.plant_counter -= 1
+						Global.refresh_counter()
 						#fajny dźwięk
 				if dead == true and name_plant != "BLEBLO":
 						lose_one_HP()
