@@ -50,9 +50,9 @@ func rand_next_plant(var i):
 		return next_plant
 
 
-func get_new_plant(var i):             # 
+func get_new_plant(var i):             
 		if plant_slots == [1,1,1,1,1,1,1]:
-				print("wszystke pelne") #tu moze być jakaś funkcja odejmująca punkty
+				print("wszystke pelne") #tu moze być jakaś funkcja odejmująca punkty... ale miałem łeb. kara za wszystkie płene? 
 		else:
 				add_child(rand_next_plant(i))
 
@@ -62,4 +62,13 @@ func _on_gameplayMachineTime_timeout():
 		rng.randomize()
 		var my_random_number = rng.randi_range(1, 6)
 		get_new_plant(my_random_number)
-	
+
+func BLEEDI_effect():
+		for i in self.get_children():
+				i.destroy_plat()
+				
+
+
+
+
+

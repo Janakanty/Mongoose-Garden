@@ -18,6 +18,7 @@ var position_x_column_array = [231, 474, 717, 960, 1203, 1446, 1689]
 func _ready():
 		$changeMongoose.play("RESET") #reset pozycji mangust. Czasem źle się ustawiają. 
 		$camera.play("slowMove")      # efekt kamery na pocztku rozgrywki
+		$background/zakrywacz/point_to_win.text = str(Global.expected_point_to_win) #ustawienie punktow warunu zwycięstwa
 
 
 func _unhandled_input(_event):

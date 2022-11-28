@@ -8,22 +8,24 @@ var pause_by_p : bool = false
 
 var plant_counter = 20
 var point = 0
-var expected_point_to_win = 500
+var expected_point_to_win = 200
 var MAX_HP = 3
 var HP = 3
 var game_over = false
+var multiplier = 1                     # mnożnik punktów
 
 # WARTOŚCI ROŚLIN
-var progress_speed = 10
+var progress_speed = 20
 var progress_speed_disadvantage = 0
 
 #LOBDILLA
-var max_progress_LOBDILLA = 10
+var max_progress_LOBDILLA = 15
 var value_regress_LOBDILLA = 20
 
 #BLEEDI
 var max_progress_BLEEDI = 20
 var value_regress_BLEEDI = 20
+var BLEEDI_column = 0
 
 #VIOLIK
 var max_progress_VIOLIK = 40
@@ -44,7 +46,7 @@ func refresh_point():
 func refresh_counter():
 	get_parent().get_node("/root/main/background/counter").text = str(plant_counter)
 
-# ZMIENNE ZPRAWDZAJĄ CZY KTOŚ JE AKTUALNIE PODLEWA LUB NAWILŻA
+# ZMIENNE SPRAWDZAJĄ CZY KTOŚ JE AKTUALNIE PODLEWA LUB NAWILŻA
 # kolumna 1
 var watering_col1 = 0
 var evaporating_col1 = 0
