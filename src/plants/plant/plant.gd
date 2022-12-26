@@ -19,10 +19,14 @@ var added_condition = 0
 var name_plant 
 var speed_progress = 10
 var final_progress_speed
+var timer_regres 
+var regres_speed = 0.5
+var wait_time_on_timer_good = 0.5
+var wait_time_on_timer_bad = 0.1
 
 
 func _ready():
-		timer_down.wait_time = time_down
+		reset_condition()
 		my_x_position = rect_position.x
 		timer_down.start()
 		change_mode()	
@@ -31,11 +35,15 @@ func _process(delta):
 		lose_way()
 		grow_way(delta)
 
+#KIEDY TIMER SPADNIE DO 0, OBNIŻA KONDYCJE ROŚLINY. 
 func _on_Timer_to_lose_timeout():
-		plant_condition = plant_condition - 1 
-		if dead == false:
+		timer_regres =  timer_regres - regres_speed
+		if timer_regres <= 0 and dead == false:
+				plant_condition = plant_condition - 1
+				reset_condition()
 				check_plant_condition()
 
+#PO SKOŃCZENIU ANIMACJI ZWOLNIJ PAMIĘĆ O ZAJĘTEJ KOMULNIE I USUŃ KWIATKA
 func _on_Tween_tween_completed(_object, _key):
 		get_parent().plant_slots[my_column-1] = 0
 		queue_free()
@@ -55,12 +63,13 @@ func taken_off_the_board():
 				tween.interpolate_property($".","rect_global_position", null, Vector2(my_x_position,-1000),0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
 
+#DODAJ PUNKTY ZA ROŚLINĘ
 func get_point():
 		Global.point += point * Global.multiplier
 		Global.refresh_point()
 
 func reset_condition():
-		timer_down.start()
+		timer_regres = time_down
 
 func effect_plant():
 		match name_plant:
@@ -85,77 +94,178 @@ func grow_way(delta): # mode mówi czy roślina będzie potrzebować pary lub wo
 						if Global.watering_col1 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col1 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
+							
 					2:
 						if Global.watering_col2 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col2 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					3:
 						if Global.watering_col3 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col3 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					4:
 						if Global.watering_col4 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col4 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					5:
 						if Global.watering_col5 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col5 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					6:
 						if Global.watering_col6 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col6 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					7:
 						if Global.watering_col7 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.evaporating_col7 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 		elif mode == 1:	
 				match my_column:
 					1:
 						if Global.evaporating_col1 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.watering_col1 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					2:
 						if Global.evaporating_col2 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.watering_col2 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					3:
 						if Global.evaporating_col3 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.watering_col3 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					4:
 						if Global.evaporating_col4 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
+						elif Global.watering_col4 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					5:
 						if Global.evaporating_col5 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.watering_col5 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					6:
 						if Global.evaporating_col6 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.watering_col6 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 					7:
 						if Global.evaporating_col7 == 1:
 							progres_bar.value += final_progress_speed * delta
 							reset_condition()
-						else: $textures/progres.value = 0
+						elif Global.watering_col7 == 1:
+							timer_down.wait_time = wait_time_on_timer_bad
+							regres_speed = 1
+							time_down
+						else: 
+							$textures/progres.value = 0
+							regres_speed = 0.5
+							timer_down.wait_time = wait_time_on_timer_good
 
+#JEŻELI ROŚLINA NIE UMARŁA, AKTUALIZUJ CZAS POZOSTAŁY DO ŚMIERCI
 func lose_way():
 		if dead == false:
-				regres_bar.value = timer_down.time_left
+				regres_bar.value = timer_regres
 				regres_bar.show()
 
 func progres_and_regress_bars_hide():
@@ -482,3 +592,5 @@ func destroy_plat():
 				tween.start()
 				if name_plant == "BLEBLO":
 						effect_BLEBLO()
+
+

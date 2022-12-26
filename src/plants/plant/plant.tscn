@@ -158,7 +158,7 @@ __meta__ = {
 [node name="stars" parent="textures/plantREADY" instance=ExtResource( 9 )]
 
 [node name="Timer_to_lose" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 0.5
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["plant"]]

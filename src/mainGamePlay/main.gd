@@ -149,5 +149,5 @@ func start_game_all_plants():
 		$plantControl.get_new_plant(2)
 		$plantControl.get_new_plant(3)
 		$plantControl.get_new_plant(4)
-		$plantControl.get_new_plant(6)
+		$plantControl.get_new_plant(5)
 

@@ -14,30 +14,31 @@ var HP = 3
 var game_over = false
 var multiplier = 1                     # mnożnik punktów
 
+
 # WARTOŚCI ROŚLIN
 var progress_speed = 20
 var progress_speed_disadvantage = 0
 
 #LOBDILLA
 var max_progress_LOBDILLA = 15
-var value_regress_LOBDILLA = 20
+var value_regress_LOBDILLA = 50
 
 #BLEEDI
 var max_progress_BLEEDI = 20
-var value_regress_BLEEDI = 20
+var value_regress_BLEEDI = 50
 var BLEEDI_column = 0
 
 #VIOLIK
 var max_progress_VIOLIK = 40
-var value_regress_VIOLIK = 20
+var value_regress_VIOLIK = 50
 
 #NEEDLI
 var max_progress_NEEDLI = 30
-var value_regress_NEEDLI = 20
+var value_regress_NEEDLI = 50
 
 #BLUMLIT
 var max_progress_BLUMLIT = 30
-var value_regress_BLUMLIT = 20
+var value_regress_BLUMLIT = 50
 
 # FUNKCJE 
 func refresh_point():
